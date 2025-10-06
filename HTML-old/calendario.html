@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <title>Calendario</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="static/style/style_perfil.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html">
+                    <img src="static/img/logo.png" alt="" width="80" height="70">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="navbar-brand" href="#"></a>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                    <ul class="navbar-nav mb-2 mb-lg-0">
+                        <a href="Perfil.html"><button class="cssbuttons-io">
+                                <span><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M0 0h24v24H0z" fill="none"></path>
+                                        <path fill="currentColor"></path>
+                                    </svg>Perfil</span>
+                            </button>
+                            <a href="Gestor_equipos.html"><button class="cssbuttons-io">
+                                    <span><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M0 0h24v24H0z" fill="none"></path>
+                                            <path fill="currentColor"></path>
+                                        </svg>Equipo</span>
+                                </button>
+                            </a>
+                            <a href="calendario.html"><button class="cssbuttons-io">
+                                    <span><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M0 0h24v24H0z" fill="none"></path>
+                                            <path fill="currentColor"></path>
+                                        </svg>Calendario</span>
+                                </button>
+                            </a>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="container mt-4">
+        <h1 style="color: whitesmoke;" class="d-flex justify-content-center fs-1">Calendario</h1>
+        <div id="cargando" class="text-center mb-4">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Cargando...</span>
+            </div>
+             <p class="mt-2 text-light">Cargando...</p>
+        </div>
+
+        <div id="error" class="alert alert-danger d-none" role="alert">
+            Error al cargar los eventos. Por favor, inténtalo de nuevo más tarde.
+        </div>
+
+        <div id="calendar" class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table table-dark table-striped table-hover" id="ctfTable" style="display: none;">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Logo</th>
+                                <th>Nombre</th>
+                                <th>Fecha Inicio</th>
+                                <th>Fecha Fin</th>
+                                <th>Duración</th>
+                                <th>Formato</th>
+                                <th>Participantes</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ctfTableBody">
+
+                        </tbody>
+                    </table>
+                </div>"
+            </div>
+        </div>
+    </main>
+</body>
+<script src="static/scripts/calendario.js"></script>
+</html>

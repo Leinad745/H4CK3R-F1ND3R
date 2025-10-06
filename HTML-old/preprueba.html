@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <title>Prefacio</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="static/style/style.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html">
+                    <img src="static/img/logo.png" alt="" width="80" height="70">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="navbar-brand" href="#"></a>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                    </ul>
+                    <form class="d-flex" role="search">
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="container-fluid">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-md-10 col-12">
+                    <h1 style="color: aliceblue; margin-top: 5%; text-align: center;">PRUEBA DE HABILIDAD</h1>
+                <p style="color: aliceblue; font-size: 20px;">Responde las siguientes preguntas para ayudarnos a
+                    ubicarte con compañeros de nivel similar al tuyo.</p>
+                <form id="quiz-form">
+                    <div class="mb-3">
+                        <label for="q1" class="form-label" style="color: aliceblue;">1. ¿Como se le llama a la tecnica de encontrar directorios ocultos en una url?</label>
+                        <select class="form-select" id="q1" required>
+                            <option value="" disabled selected>Selecciona una opción</option>
+                            <option value="lfi">LFI</option>
+                            <option value="xss">XSS</option>
+                            <option value="fuzz">Fuzzing</option>
+                            <option value="rce">RCE</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="q2" class="form-label" style="color: aliceblue;">2. ¿Cuantas capas del modelo OSI
+                            hay?</label>
+                        <select class="form-select" id="q2" required>
+                            <option value="" disabled selected>Selecciona una opción</option>
+                            <option value="unknown">No sé</option>
+                            <option value="two">5</option>
+                            <option value="five">7</option>
+                            <option value="seven">8</option>
+                            <option value="ten">10</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="q3" class="form-label" style="color: aliceblue;">3. Cual de los siguientes es una
+                            herramienta usada en ataques de fuerza bruta?</label>
+                        <select class="form-select" id="q3" required>
+                            <option value="" disabled selected>Selecciona una opción</option>
+                            <option value="unknown">No sé</option>
+                            <option value="hydra">Hydra</option>
+                            <option value="crackmapexec">crackmapexec</option>
+                            <option value="linux">Linux</option>
+                            <option value="ghidra">ghidra</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="q4" class="form-label" style="color: aliceblue;">4. Cual de las siguientes
+                            distribuciones puede ser utilizada para pruebas de penetración?</label>
+                        <select class="form-select" id="q4" required>
+                            <option value="" disabled selected>Selecciona una opción</option>
+                            <option value="unknown">No sé</option>
+                            <option value="Ubuntu">Ubuntu</option>
+                            <option value="Mint">Linux Mint</option>
+                            <option value="Kali">Kali Linux</option>
+                            <option value="all">Todas pueden ser usadas</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="q5" class="form-label" style="color: aliceblue;">5. Cual de los siguientes escenario
+                            describe un ataque MITM?</label>
+                        <select class="form-select" id="q5" required>
+                            <option value="" disabled selected>Selecciona una opción</option>
+                            <option value="mm">Un atacante se interpone en la comunicación entre dos partes</option>
+                            <option value="bf">Un atacante hace prueba y error de contraseñas hasta dar con la correcta
+                            </option>
+                            <option value="ph">Un atacante envia un email malicioso</option>
+                            <option value="ddos">Un atacante utiliza una botnet para inundar el trafico de una
+                                organizacion</option>
+                            <option value="all">Todas las respuestas anteriores son correctas</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="q6" class="form-label" style="color: aliceblue;">6. Cual es el nombre de un
+                            dispositivo que sirve como la barrera de seguridad de una red?</label>
+                        <select class="form-select" id="q6" required>
+                            <option value="" disabled selected>Selecciona una opción</option>
+                            <option value="ro">Router</option>
+                            <option value="fw">Cortafuegos</option>
+                            <option value="br">Puente</option>
+                            <option value="re">Repetidor</option>
+                            <option value="serv">Servidor</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="q7" class="form-label" style="color: aliceblue;">7. Cual de los siguientes
+                            <strong>NO</strong> es un distribucion de Linux?</label>
+                        <select class="form-select" id="q7" required>
+                            <option value="" disabled selected>Selecciona una opción</option>
+                            <option value="unknown">No sé</option>
+                            <option value="bsd">FreeBSD</option>
+                            <option value="ba">BlackArch</option>
+                            <option value="fe">Fedora</option>
+                            <option value="at">Antix</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="q8" class="form-label" style="color: aliceblue;">8. Que comando es utilizado para
+                            ejecutar un programa como <strong>root</strong> en linux?</label>
+                        <select class="form-select" id="q8" required>
+                            <option value="" disabled selected>Selecciona una opción</option>
+                            <option value="unknown">No sé</option>
+                            <option value="pwd">pwd</option>
+                            <option value="sudo">sudo</option>
+                            <option value="systemctl">systemctl</option>
+                            <option value="dir">dir</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="q9" class="form-label" style="color: aliceblue;">9. Cual es el distribuidor de nube
+                            mas utilizado del mundo?</label>
+                        <select class="form-select" id="q9" required>
+                            <option value="" disabled selected>Selecciona una opción</option>
+                            <option value="unknown">No sé</option>
+                            <option value="gcp">GCP</option>
+                            <option value="azu">Azure</option>
+                            <option value="cloudflare">Cloudflare</option>
+                            <option value="aws">AWS</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="q10" class="form-label" style="color: aliceblue;">10. Que lenguaje de programacion
+                            se utiliza para el desarrollo web?</label>
+                        <select class="form-select" id="q10" required>
+                            <option value="" disabled selected>Selecciona una opción</option>
+                            <option value="unknown">No sé</option>
+                            <option value="python">python</option>
+                            <option value="javascript">javascript</option>
+                            <option value="java">java</option>
+                            <option value="todos">Todos pueden ser usados</option>
+                        </select>
+                    </div>
+                </form>
+                <button id="botones" type="submit" class="btn btn-success d-block mx-auto" style="margin-top: 1%; width: 200px;"
+                    onclick="submitQuiz()">Enviar</button>
+                </div>
+            </div>
+        </div>
+        <script src="static/scripts/prueba.js"></script>
+        <div id="overlay" class="overlay"></div>
+    </main>
+</body>
+</html>
