@@ -1,0 +1,23 @@
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-image: url('../assets/fondo.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.container-fluid{
+    background: linear-gradient(to right, #7c298c, #000000); /* degradado */
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar {
+    border-top: 10px solid #322A38;
+    border-bottom: 10px solid #322A38;
+}
