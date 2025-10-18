@@ -1,14 +1,16 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import logo from '../assets/logo.png'
+import logo_new from '../assets/logo_new.png'
 
 export function NavBar() {
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary">
+
+    <nav className="navbar navbar-expand-lg">
+            {/*CAMBIA EL LOGO POR OTRO EN MEDIO CON UN DEGRADADO*/}
       <div className="container-fluid">
         <a className="navbar-brand" href="#">
-          <img src={logo} alt="Logo" width={80} height={70} />
+          <img id="logo" src={logo_new} alt="Logo" />
         </a>
       </div>
     </nav>
-  );
+);
 }
