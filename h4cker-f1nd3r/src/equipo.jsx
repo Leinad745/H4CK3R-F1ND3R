@@ -1,11 +1,9 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 //import { useNavigate } from "react-router-dom";
 
-export default function Login() {
+export default function GestorEquipo() {
     {/*const navigate = useNavigate();*/}
     return (
-        <div>
-            <h1>Iniciar Sesión</h1>
-        </div>
+        <h1>Gestor de Equipo</h1>
     )
 }

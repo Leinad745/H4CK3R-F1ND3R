@@ -1,10 +1,12 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import img_index2 from "./assets/img_index2.png";
 import teamwork from "./assets/teamwork.png";
 import skills from "./assets/skills.png";
+import ranking from "./assets/ranking.png";
 
 export function Index() {
+  const navigate = useNavigate();
   return (
     <div>
       <div className="row g-3 align-items-center">
@@ -38,7 +40,7 @@ export function Index() {
               marginTop: "1%",
               fontSize: "1rem",
             }}
-            onclick="location.href='register.html'"
+            onClick={() => navigate('/register')}
           >
             Registrate!
           </button>
@@ -52,7 +54,7 @@ export function Index() {
               marginTop: "1%",
               fontSize: "1rem",
             }}
-            onclick="location.href='login.html'"
+            onClick={() => navigate('/login')}
           >
             Iniciar Sesión
           </button>
@@ -60,8 +62,10 @@ export function Index() {
       </div>
       <section className="mt-5 text-white">
         <div className="row align-items-center mb-5">
-          <div className="col-md-6">
+          <div className="col-md-6 text-center">
+            <div className="mb-3">
             <h2>Conéctate con otros Hackers</h2>
+            </div>
             <p>
               Busca compañeros para CTFs y Hackatones para lograr tus objetivos.
             </p>
@@ -71,11 +75,12 @@ export function Index() {
               src={teamwork}
               alt="Equipo hacker"
               className="img-fluid rounded"
+              style={{ maxWidth: "100%", height: "auto" }}
             />
           </div>
         </div>
         <div className="row align-items-center mb-5 flex-md-row-reverse">
-          <div className="col-md-6">
+          <div className="col-md-6 text-center">
             <h2>Sin experiencia? No hay problema!</h2>
             <p>
               Nuestra prueba de habilidad de te ayuda a encontrar compañeros con
@@ -87,11 +92,12 @@ export function Index() {
               src={skills}
               alt="Aprendizaje"
               className="img-fluid rounded"
+              style={{ maxWidth: "100%", height: "auto" }}
             />
           </div>
         </div>
         <div className="row align-items-center mb-5">
-          <div className="col-md-6">
+          <div className="col-md-6 text-center">
             <h2>Compite en nuestro ranking!</h2>
             <p>
               Al participar en eventos y desafios y registrarlos en nuestro
@@ -101,7 +107,7 @@ export function Index() {
           </div>
           <div className="col-md-6 text-center">
             <img
-              src={teamwork}
+              src={ranking}
               alt="Ranking"
               className="img-fluid rounded"
             />
