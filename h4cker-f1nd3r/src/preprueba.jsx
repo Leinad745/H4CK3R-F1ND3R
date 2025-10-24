@@ -73,7 +73,6 @@ export default function Preprueba() {
       imagen = flag_hunter;
     }
 
-    // Actualizar localStorage (esto está bien)
     const usuariosStr = localStorage.getItem('usuarios');
     if (usuariosStr) {
         const usuarios = JSON.parse(usuariosStr);
@@ -83,7 +82,6 @@ export default function Preprueba() {
         }
     }
 
-    // 4. Actualizar el ESTADO del resultado y mostrar el overlay
     setResultado({ nivel, mensaje, imagen });
     setMostrarResultado(true);
   };
@@ -97,10 +95,6 @@ export default function Preprueba() {
               <h1 style={{ color: "aliceblue", marginTop: "5%", textAlign: "center" }}>
                 PRUEBA DE HABILIDAD
               </h1>
-              {/* Usamos el <form> con onSubmit. 
-                Cada <select> ahora usa 'value' y 'onChange' para estar
-                controlado por el estado de React.
-              */}
               <form id="quiz-form" onSubmit={submitQuiz}>
                 <div className="mb-3">
                   <label htmlFor="q1" className="form-label" style={{ color: "aliceblue" }}>
