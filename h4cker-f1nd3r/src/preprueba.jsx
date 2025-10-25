@@ -5,6 +5,7 @@ import novato from "./assets/novato.png";
 import script_kiddie from "./assets/script_kiddie.png";
 import red_teamer from "./assets/red_teamer.png";
 import flag_hunter from "./assets/flag_hunter.png";
+import { useNavigate } from "react-router-dom";
 
 const respuestasCorrectas = {
   q1: "rce", q2: "five", q3: "hydra", q4: "all", q5: "mm",
@@ -20,6 +21,7 @@ export default function Preprueba() {
   const [resultado, setResultado] = useState(null);
   
   const [mostrarResultado, setMostrarResultado] = useState(false);
+  const navigate = useNavigate();
 
   const handleRespuestaChange = (e) => {
     const { id, value } = e.target;
@@ -295,7 +297,7 @@ export default function Preprueba() {
             <h1>Tu nivel es: {resultado.nivel}</h1>
             <p>{resultado.mensaje}</p>
             <img src={resultado.imagen} alt={resultado.nivel} />
-            <a href="Perfil.html" className="btn btn-light">Ir a mi Perfil</a>
+            <button onClick={() => navigate('/perfil')} className="btn btn-light">Ir a mi Perfil</button>
           </div>
         )}
       </main>

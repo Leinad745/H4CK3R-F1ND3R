@@ -1,6 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import logo_new from '../assets/logo_new.png'
 import { Link } from 'react-router-dom';
+import Perfil from '../perfil';
 
 export function NavBar() {
 return (
@@ -29,7 +31,7 @@ return (
             
             <li className="nav-item">
               <Link to="/perfil"> 
-                <button className="cssbuttons-io">
+                <button className="cssbuttons-io" onClick={Perfil}>
                   <span>
                     Perfil
                   </span>
