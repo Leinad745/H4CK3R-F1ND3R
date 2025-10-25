@@ -1,6 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useState } from "react"; // Hook para manejar el estado del componente
-//import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import perfil from "./assets/perfil.png";
 import "./styles/perfil.css";
 
@@ -135,6 +134,17 @@ export default function Perfil() {
                   </li>
                 </ul>
               </div>
+              <div className="row">
+                    <div className="col-sm-12">
+                      <button
+                        type="button"
+                        className="btn btn-primary"
+                        onClick={() => setMostrarModal(true)}
+                      >
+                        Editar
+                      </button>
+                    </div>
+                  </div>
             </div>
             <div className="col-md-8">
               <div className="card mb-3">
