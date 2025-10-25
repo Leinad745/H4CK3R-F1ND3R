@@ -1,0 +1,34 @@
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-image: url('../assets/bg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.navbar .container-fluid {
+    background: linear-gradient(to right, #7c298c, #000000);
+    padding: 15px 30px;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.navbar-brand {
+    margin: 0 !important; 
+}
+
+.navbar-brand img {
+    width: 250px;
+    height: 120px;
+    object-fit: contain;
+}
+
+#logo {
+    border-radius: 15px;
+    background-color: black;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
