@@ -7,6 +7,7 @@ import Perfil from "./perfil";
 import GestorEquipo from "./equipo";
 import Calendar from "./calendar";
 import Preprueba from "./preprueba";
+import { Footer } from "./components/footer";
 
 export default function App() {
   return (
@@ -20,7 +21,10 @@ export default function App() {
         <Route path="/equipos" element={<GestorEquipo />} />
         <Route path="/calendario" element={<Calendar />} />
         <Route path="/preprueba" element={<Preprueba />} />
+        <Route path="/index" element={<Index />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
+
   );
 }
