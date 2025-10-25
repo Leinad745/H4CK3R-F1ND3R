@@ -1,10 +1,10 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from 'react';
 
-const hardcodedEvents =[
+const datos =[
   {
     "organizers": [],
-    "ctftime_url": "https://ctftime.org/event/82/",
+    "ctftime_url": "https://ctftime.org/events/82/",
     "ctf_id": 5,
     "weight": 0.00,
     "duration": {
@@ -31,7 +31,7 @@ const hardcodedEvents =[
   },
   {
     "organizers": [],
-    "ctftime_url": "https://ctftime.org/event/81/",
+    "ctftime_url": "https://ctftime.org/events/81/",
     "ctf_id": 5,
     "weight": 0.00,
     "duration": {
@@ -58,7 +58,7 @@ const hardcodedEvents =[
   },
   {
     "organizers": [],
-    "ctftime_url": "https://ctftime.org/event/80/",
+    "ctftime_url": "https://ctftime.org/events/80/",
     "ctf_id": 5,
     "weight": 0.00,
     "duration": {
@@ -90,7 +90,7 @@ const hardcodedEvents =[
         "name": "HackerDom"
       }
     ],
-    "ctftime_url": "https://ctftime.org/event/379/",
+    "ctftime_url": "https://ctftime.org/events/379/",
     "ctf_id": 7,
     "weight": 0.00,
     "duration": {
@@ -117,7 +117,7 @@ const hardcodedEvents =[
   },
   {
     "organizers": [],
-    "ctftime_url": "https://ctftime.org/event/79/",
+    "ctftime_url": "https://ctftime.org/events/79/",
     "ctf_id": 5,
     "weight": 0.00,
     "duration": {
@@ -149,7 +149,7 @@ const hardcodedEvents =[
         "name": "HackerDom"
       }
     ],
-    "ctftime_url": "https://ctftime.org/event/378/",
+    "ctftime_url": "https://ctftime.org/events/378/",
     "ctf_id": 7,
     "weight": 0.00,
     "duration": {
@@ -176,7 +176,7 @@ const hardcodedEvents =[
   },
   {
     "organizers": [],
-    "ctftime_url": "https://ctftime.org/event/78/",
+    "ctftime_url": "https://ctftime.org/events/78/",
     "ctf_id": 5,
     "weight": 0.00,
     "duration": {
@@ -208,7 +208,7 @@ const hardcodedEvents =[
         "name": "HackerDom"
       }
     ],
-    "ctftime_url": "https://ctftime.org/event/377/",
+    "ctftime_url": "https://ctftime.org/events/377/",
     "ctf_id": 7,
     "weight": 0.00,
     "duration": {
@@ -235,7 +235,7 @@ const hardcodedEvents =[
   },
   {
     "organizers": [],
-    "ctftime_url": "https://ctftime.org/event/77/",
+    "ctftime_url": "https://ctftime.org/events/77/",
     "ctf_id": 5,
     "weight": 0.00,
     "duration": {
@@ -267,7 +267,7 @@ const hardcodedEvents =[
         "name": "HackerDom"
       }
     ],
-    "ctftime_url": "https://ctftime.org/event/124/",
+    "ctftime_url": "https://ctftime.org/events/124/",
     "ctf_id": 6,
     "weight": 0.00,
     "duration": {
@@ -294,7 +294,7 @@ const hardcodedEvents =[
   },
   {
     "organizers": [],
-    "ctftime_url": "https://ctftime.org/event/20/",
+    "ctftime_url": "https://ctftime.org/events/20/",
     "ctf_id": 4,
     "weight": 70.00,
     "duration": {
@@ -321,7 +321,7 @@ const hardcodedEvents =[
   },
   {
     "organizers": [],
-    "ctftime_url": "https://ctftime.org/event/5/",
+    "ctftime_url": "https://ctftime.org/events/5/",
     "ctf_id": 15,
     "weight": 20.00,
     "duration": {
@@ -353,7 +353,7 @@ const hardcodedEvents =[
         "name": "andgein"
       }
     ],
-    "ctftime_url": "https://ctftime.org/event/376/",
+    "ctftime_url": "https://ctftime.org/events/376/",
     "ctf_id": 7,
     "weight": 0.00,
     "duration": {
@@ -385,7 +385,7 @@ const hardcodedEvents =[
         "name": "Plaid Parliament of Pwning"
       }
     ],
-    "ctftime_url": "https://ctftime.org/event/12/",
+    "ctftime_url": "https://ctftime.org/events/12/",
     "ctf_id": 10,
     "weight": 90.00,
     "duration": {
@@ -412,7 +412,7 @@ const hardcodedEvents =[
   },
   {
     "organizers": [],
-    "ctftime_url": "https://ctftime.org/event/24/",
+    "ctftime_url": "https://ctftime.org/events/24/",
     "ctf_id": 13,
     "weight": 40.00,
     "duration": {
@@ -420,7 +420,7 @@ const hardcodedEvents =[
       "days": 1
     },
     "live_feed": "",
-    "logo": "https://ctftime.org//media/events/phd1_1.png",
+    "logo": "https://ctftime.org//media/eventos/phd1_1.png",
     "id": 24,
     "title": "PHD CTF Finals 2011",
     "start": "2011-05-19T15:00:00+00:00",
@@ -439,7 +439,7 @@ const hardcodedEvents =[
   },
   {
     "organizers": [],
-    "ctftime_url": "https://ctftime.org/event/28/",
+    "ctftime_url": "https://ctftime.org/events/28/",
     "ctf_id": 21,
     "weight": 50.00,
     "duration": {
@@ -466,7 +466,7 @@ const hardcodedEvents =[
   },
   {
     "organizers": [],
-    "ctftime_url": "https://ctftime.org/event/1/",
+    "ctftime_url": "https://ctftime.org/events/1/",
     "ctf_id": 1,
     "weight": 100.00,
     "duration": {
@@ -493,7 +493,7 @@ const hardcodedEvents =[
   },
   {
     "organizers": [],
-    "ctftime_url": "https://ctftime.org/event/36/",
+    "ctftime_url": "https://ctftime.org/events/36/",
     "ctf_id": 20,
     "weight": 40.00,
     "duration": {
@@ -520,7 +520,7 @@ const hardcodedEvents =[
   },
   {
     "organizers": [],
-    "ctftime_url": "https://ctftime.org/event/23/",
+    "ctftime_url": "https://ctftime.org/events/23/",
     "ctf_id": 2,
     "weight": 80.00,
     "duration": {
@@ -547,7 +547,7 @@ const hardcodedEvents =[
   },
   {
     "organizers": [],
-    "ctftime_url": "https://ctftime.org/event/37/",
+    "ctftime_url": "https://ctftime.org/events/37/",
     "ctf_id": 33,
     "weight": 20.00,
     "duration": {
@@ -579,7 +579,7 @@ const hardcodedEvents =[
         "name": "FluxFingers"
       }
     ],
-    "ctftime_url": "https://ctftime.org/event/13/",
+    "ctftime_url": "https://ctftime.org/events/13/",
     "ctf_id": 8,
     "weight": 80.00,
     "duration": {
@@ -611,7 +611,7 @@ const hardcodedEvents =[
         "name": "CSAW CTF Organizers"
       }
     ],
-    "ctftime_url": "https://ctftime.org/event/4/",
+    "ctftime_url": "https://ctftime.org/events/4/",
     "ctf_id": 18,
     "weight": 45.00,
     "duration": {
@@ -619,7 +619,7 @@ const hardcodedEvents =[
       "days": 2
     },
     "live_feed": "",
-    "logo": "https://ctftime.org//media/events/csaw.png",
+    "logo": "https://ctftime.org//media/eventos/csaw.png",
     "id": 4,
     "title": "CSAW CTF Qualification Round 2011",
     "start": "2011-09-23T20:00:00+00:00",
@@ -643,7 +643,7 @@ const hardcodedEvents =[
         "name": "0ldEur0pe"
       }
     ],
-    "ctftime_url": "https://ctftime.org/event/3/",
+    "ctftime_url": "https://ctftime.org/events/3/",
     "ctf_id": 17,
     "weight": 70.00,
     "duration": {
@@ -675,7 +675,7 @@ const hardcodedEvents =[
         "name": "ENOFLAG"
       }
     ],
-    "ctftime_url": "https://ctftime.org/event/29/",
+    "ctftime_url": "https://ctftime.org/events/29/",
     "ctf_id": 24,
     "weight": 25.00,
     "duration": {
@@ -707,7 +707,7 @@ const hardcodedEvents =[
         "name": "SISS"
       }
     ],
-    "ctftime_url": "https://ctftime.org/event/58/",
+    "ctftime_url": "https://ctftime.org/events/58/",
     "ctf_id": 28,
     "weight": 0.00,
     "duration": {
@@ -737,47 +737,47 @@ const hardcodedEvents =[
 
 export default function Calendar() {
 
-    const [events] = useState(hardcodedEvents);
+    // Estado de eventos almacenados
+    const [eventos] = useState(datos);
 
-    const formatDate = (isoString) => {
+    
+    const convFecha = (fecha) => {
         const options = { dateStyle: 'medium', timeStyle: 'short' };
-        return new Date(isoString).toLocaleString('es-CL', options);
+        return new Date(fecha).toLocaleString('es-CL', options);
     };
 
     return (
         <div className="container mt-4">
             <div className="">
-                <h1 style={{textAlign: "center",color: "white"}}>Calendario de Eventos CTF</h1>
+                <h1 style={{textAlign: "center",color: "white"}}>Calendario de CTFs</h1>
             </div>
 
-            {/* Contenido principal: Lista de eventos */}
-            <div id="events-list" className="list-group mt-4">
+            <div id="eventos-list" className="list-group mt-4">
 
-                {events.length > 0 ? (
-                    events.map(event => (
+                {eventos.length > 0 ? (
+                    eventos.map(events => (
                         <a 
-                            key={event.id} 
-                            href={event.url} // Hacemos que el item sea un link
-                            target="_blank"          // Para que abra en pestaña nueva
+                            href={events.url} // enlace al evento
+                            target="_blank"
                             rel="noopener noreferrer"
                             className="list-group-item list-group-item-action"
                             style={{backgroundColor: "black"}}
                         >
                             <div style={{color: "white"}}>
                             <div className="d-flex w-100 justify-content-between">
-                                <h5 className="mb-1">{event.title}</h5>
-                                <small>Formato: {event.format}</small>
+                                <h5 className="mb-1">{events.title}</h5>
+                                <small>Formato: {events.format}</small>
                             </div>
                             <p className="mb-1">
-                                <strong>Inicio:</strong> {formatDate(event.start)} <br />
-                                <strong>Fin:</strong> {formatDate(event.finish)}
+                                <strong>Inicio:</strong> {convFecha(events.start)} <br />
+                                <strong>Fin:</strong> {convFecha(events.finish)}
                             </p>
-                            <small>Organizador(es): {event.organizers.map(org => org.name).join(', ')}</small>
+                            <small>Organizador(es): {events.organizers.map(org => org.name).join(', ')}</small>
                             </div>
                         </a>
                     ))
                 ) : (
-                    // Mensaje por si el array 'hardcodedEvents' estuviera vacío
+                    // Mensaje por si el array 'datos' estuviera vacío
                     <div className="list-group-item text-center text-muted">
                         No hay eventos para mostrar.
                     </div>
