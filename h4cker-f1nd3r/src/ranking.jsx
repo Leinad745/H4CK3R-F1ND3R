@@ -1,4 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+
 import { useState, useEffect } from "react";
 
 export default function Ranking() {
@@ -145,4 +146,5 @@ export default function Ranking() {
             </div>
         </div>
     );
+
 }

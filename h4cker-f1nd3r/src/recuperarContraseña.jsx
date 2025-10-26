@@ -1,5 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
+
 import { useNavigate, Link } from "react-router-dom";
 
 export default function RecuperarContraseña() {
@@ -19,7 +20,7 @@ export default function RecuperarContraseña() {
             return;
         }
 
-        // Aquí iría la lógica para enviar el correo de recuperación
+        
         alert("Si el correo existe, recibirás instrucciones para recuperar tu contraseña");
         navigate("/login");
     };
@@ -61,4 +62,5 @@ export default function RecuperarContraseña() {
             </div>
         </div>
     );
+
 }
