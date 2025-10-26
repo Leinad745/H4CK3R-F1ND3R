@@ -6,7 +6,7 @@ import '../styles/footer.css';
 export function Footer (){
     
     return (
-    <>
+    <footer>
       <link href="../styles/footer.css" rel="stylesheet" />
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
       <div className="footer">
@@ -37,7 +37,7 @@ export function Footer (){
               </div>				
           </div>
       </div>
-    </>
+    </footer>
     )
 
 }

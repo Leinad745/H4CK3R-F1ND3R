@@ -44,66 +44,71 @@ export default function Login() {
   };
 
   return (
-    <main>
-      <h1 id="titulo" style={{ color: "aliceblue", marginTop: "5%" }}>
-        1NGR354-7U5-CR3D3NC14L35
-      </h1>
-
-      <div className="contenedor container row">
-        <div className="row g-3 align-items-center">
-          <div className="row align-items-center">
-            <label
-              htmlFor="correoElectronicoLogin"
-              style={{ color: "aliceblue" }}
-              className="form-label textForm"
-            >
-              Correo electrónico
-            </label>
-            <input
-              type="text"
-              id="correoElectronicoLogin"
-              className="form-control"
-              placeholder="Ingresa tu usuario"
-              value={correoElectronicoLogin}
-              onChange={(e) => setCorreoElectronicoLogin(e.target.value)}
-            />
+    <div className="container mt-5">
+      <div className="row justify-content-center">
+        <div className="col-md-6">
+          <div className="card">
+            <div className="card-body">
+              <h2 className="text-center mb-4">1NGR354-7U5-CR3D3NC14L35</h2>
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  loginUsuario();
+                }}
+              >
+                <div className="mb-3">
+                  <label
+                    htmlFor="correoElectronicoLogin"
+                    className="form-label"
+                    style={{ color: "aliceblue" }}
+                  >
+                    Correo electrónico
+                  </label>
+                  <input
+                    type="email"
+                    className="form-control"
+                    id="correoElectronicoLogin"
+                    placeholder="Ingresa tu correo electrónico"
+                    value={correoElectronicoLogin}
+                    onChange={(e) => setCorreoElectronicoLogin(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="mb-3">
+                  <label
+                    htmlFor="passwordLogin"
+                    className="form-label"
+                    style={{ color: "aliceblue" }}
+                  >
+                    Contraseña
+                  </label>
+                  <input
+                    type="password"
+                    className="form-control"
+                    id="passwordLogin"
+                    placeholder="**********"
+                    value={passwordLogin}
+                    onChange={(e) => setPasswordLogin(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="d-grid gap-2">
+                  <button type="submit" className="btn btn-primary">
+                    Iniciar Sesión
+                  </button>
+                  <Link
+                    to="/recuperarContraseña"
+                    className="btn btn-link"
+                    style={{ color: "aliceblue" }}
+                  >
+                    ¿Olvidaste tu contraseña?
+                  </Link>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
-
-        <div className="row align-items-center">
-          <label
-            htmlFor="passwordLogin"
-            className="form-label textForm"
-            style={{ color: "aliceblue", marginTop: "2%" }}
-          >
-            Contraseña
-          </label>
-          <input
-            type="password"
-            id="passwordLogin"
-            className="form-control"
-            placeholder="**********"
-            value={passwordLogin}
-            onChange={(e) => setPasswordLogin(e.target.value)}
-          />
-        </div>
-
-        <div className="row g-3 align-items-center">
-          <button
-            id="botones"
-            type="button"
-            className="btn btn-success mx-auto d-block"
-            style={{ marginTop: "1%" }}
-            onClick={loginUsuario}
-          >
-            Enviar
-          </button>
-          <Link to="/recuperar-password">
-            <label>Recuperar contraseña</label>
-          </Link>
-          <span id="mensajeLogin"></span>
-        </div>
       </div>
-    </main>
+    </div>
   );
 }

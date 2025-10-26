@@ -40,7 +40,7 @@ return (
             </li>
             
             <li className="nav-item">
-              <Link to="/equipos">
+              <Link to="/equipo">
                 <button className="cssbuttons-io">
                   <span>
                     Equipo
@@ -59,6 +59,15 @@ return (
               </Link>
             </li>
 
+            <li className="nav-item">
+              <Link to="/ranking"> 
+                <button className="cssbuttons-io" >
+                  <span>
+                    Ranking
+                  </span>
+                </button>
+              </Link>
+            </li>
           </ul>
         </div>
       </div>
