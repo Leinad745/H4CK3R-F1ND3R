@@ -8,6 +8,7 @@ import GestorEquipo from "./equipo";
 import Calendar from "./calendar";
 import Preprueba from "./preprueba";
 import { Footer } from "./components/footer";
+import RecuperarContraseña from "./recuperarContraseña";
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
         <Route path="/calendario" element={<Calendar />} />
         <Route path="/preprueba" element={<Preprueba />} />
         <Route path="/index" element={<Index />} />
+        <Route path="/recuperar-password" element={<RecuperarContraseña />} />
       </Routes>
       <Footer />
     </BrowserRouter>
