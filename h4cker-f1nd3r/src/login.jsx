@@ -36,7 +36,7 @@ export default function Login() {
       if (usuarioEncontrado) {
         alert("Login exitoso");
         limpiarCampos();
-        navigate("/perfil"); // Cambia esto según la ruta de tu app
+        navigate("/preprueba");
       } else {
         alert("Credenciales incorrectas");
       }
