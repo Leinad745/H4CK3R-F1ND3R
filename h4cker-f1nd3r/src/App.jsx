@@ -10,7 +10,6 @@ import Preprueba from "./preprueba";
 import RecuperarContraseña from "./recuperarContraseña";
 import Ranking from "./ranking";
 import { Footer } from "./components/footer";
-import RecuperarContraseña from "./recuperarContraseña";
 
 export default function App() {
   return (
