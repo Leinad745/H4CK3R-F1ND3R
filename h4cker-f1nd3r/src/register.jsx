@@ -75,6 +75,8 @@ export default function Register() {
       password,
       nivel: "",
       edad: "",
+      ciudad: "",
+      especialidad: ""
     };
 
     usuarios.push(nuevoUsuario);
