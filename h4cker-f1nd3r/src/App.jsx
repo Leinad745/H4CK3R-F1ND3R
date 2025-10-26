@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { NavBar } from "./components/navbar";
 import { Index } from "./index";
 import Register from "./register";
-import Login from "./login"; // Asegúrate de tener un componente Login
+import Login from "./login";
 import Perfil from "./perfil";
 import GestorEquipo from "./equipo";
 import Calendar from "./calendar";
