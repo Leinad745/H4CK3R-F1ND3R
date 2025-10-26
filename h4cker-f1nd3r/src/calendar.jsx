@@ -757,7 +757,7 @@ export default function Calendar() {
                 {eventos.length > 0 ? (
                     eventos.map(events => (
                         <a 
-                            href={events.url} // enlace al evento
+                            href={events.url} //Algunos pueden no cargar por mala conexion
                             target="_blank"
                             rel="noopener noreferrer"
                             className="list-group-item list-group-item-action"
@@ -777,7 +777,6 @@ export default function Calendar() {
                         </a>
                     ))
                 ) : (
-                    // Mensaje por si el array 'datos' estuviera vacío
                     <div className="list-group-item text-center text-muted">
                         No hay eventos para mostrar.
                     </div>
