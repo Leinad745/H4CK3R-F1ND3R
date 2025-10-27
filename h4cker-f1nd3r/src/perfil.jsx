@@ -1,69 +1,104 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useState } from "react";
+import { useState, useEffect } from "react"; // Importamos useEffect para cargar datos al montar
 import perfil from "./assets/perfil.png";
 import "./styles/perfil.css";
 
 export default function Perfil() {
-  // Estado para almacenar los datos del perfil del usuario
-  // Estos son los datos que se mostrarán en la vista principal del perfil
+
   const [datosPerfil, setDatosPerfil] = useState({
     nombre: "John Doe",
     email: "johndoe@example.com",
-    edad: "25",
-    ciudad: "Santiago",
-    especialidad: "Full Stack Developer"
+    edad: "",
+    ciudad: "",
+    especialidad: "",
+    nivel: ""
   });
 
-  // Estado para almacenar temporalmente los valores del formulario del modal
-  // Se usa para capturar los cambios antes de guardarlos en datosPerfil
   const [formData, setFormData] = useState({
     edad: "",
     ciudad: "",
     especialidad: ""
   });
 
-  // Estado para controlar si el modal está visible o no
   const [mostrarModal, setMostrarModal] = useState(false);
 
-  // Función que se ejecuta cada vez que el usuario escribe en un input del modal
-  // Actualiza el estado formData con el nuevo valor
   const handleInputChange = (e) => {
-    const { name, value } = e.target; // Extraemos el name y valor del input
+    const { name, value } = e.target;
     
-    // Actualizamos el estado manteniendo los valores anteriores (...prev)
-    // y solo modificamos el campo que cambió
     setFormData(prev => ({
-      ...prev, // Spread operator: copia todos los campos existentes
-      [name]: value // Actualiza solo el campo específico
+      ...prev,
+      [name]: value
     }));
   };
 
-  // Función que se ejecuta al hacer clic en "Guardar Perfil"
-  // Toma los datos del formulario y actualiza el perfil principal
   const handleGuardarPerfil = (e) => {
-    e.preventDefault(); // Prevenir que el formulario recargue la página
-    
-    // Actualizamos datosPerfil con los nuevos valores del formulario
-    // Si un campo está vacío, mantiene el valor anterior (|| prev.campo)
-    setDatosPerfil(prev => ({
-      ...prev, // Mantenemos todos los campos existentes
-      edad: formData.edad || prev.edad,
-      ciudad: formData.ciudad || prev.ciudad,
-      especialidad: formData.especialidad || prev.especialidad
-    }));
+    e.preventDefault();
+    const cambioDatos = {
+      ...datosPerfil,
+      edad: formData.edad || datosPerfil.edad,
+      ciudad: formData.ciudad || datosPerfil.ciudad,
+      especialidad: formData.especialidad || datosPerfil.especialidad
+    };
 
-    // Limpiamos el formulario después de guardar
-    // Esto resetea todos los inputs del modal
+    setDatosPerfil(cambioDatos);
+
+    try {
+      const usuariosGuardados = localStorage.getItem('usuarios');
+
+      if (usuariosGuardados) {
+        const usuarios = JSON.parse(usuariosGuardados);
+
+        if (usuarios && usuarios.length > 0) {
+          usuarios[usuarios.length - 1] = {
+            nombreCompleto: cambioDatos.nombre,
+            correoElectronico: cambioDatos.email,
+            edad: cambioDatos.edad,
+            ciudad: cambioDatos.ciudad,
+            especialidad: cambioDatos.especialidad,
+            nivel: cambioDatos.nivel
+          };
+          localStorage.setItem('usuarios', JSON.stringify(usuarios));
+        }
+      }
+
+    } catch (error) {
+      console.error('Error al guardar en localstorage: ',error)
+    }
+
     setFormData({
       edad: "",
       ciudad: "",
       especialidad: ""
     });
 
-    // Cerramos el modal
     setMostrarModal(false);
   };
 
+  useEffect(() => {
+    try {
+      const usuariosGuardados = localStorage.getItem('usuarios');
+      if (usuariosGuardados) {
+        const usuarios = JSON.parse(usuariosGuardados);
+        
+        if (usuarios && usuarios.length > 0){
+          const usuarioActual = usuarios[usuarios.length -1];
+
+        if (usuarioActual) {
+          setDatosPerfil({
+            nombre: usuarioActual.nombreCompleto || "John Doe",
+            email: usuarioActual.correoElectronico || "johndoe@example.com",
+            edad: usuarioActual.edad || "",
+            ciudad: usuarioActual.ciudad || "",
+            especialidad: usuarioActual.especialidad || "",
+            nivel: usuarioActual.nivel || "Sin nivel asignado"
+          });
+        }
+      }
+    }
+  } catch (error) {
+      console.log("Error al cargar datos",error)
+    }
+  }, []);
   return (
     <main>
       <div className="container">
@@ -87,7 +122,7 @@ export default function Perfil() {
                         className="sub_texto text-secondary mb-1"
                         id="nivelUsuario"
                       >
-                        {/*datosPerfil.especialidad AÑADIR EL NIVEL DE LA PREPRUEBA*/}
+                        {datosPerfil.nivel}
                       </p>
                     </div>
                   </div>
@@ -210,8 +245,6 @@ export default function Perfil() {
           </div>
         </div>
       </div>
-
-      {/* Modal personalizado para editar perfil */}
       {mostrarModal && (
         <div 
           style={{

@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import logo_new from '../assets/logo_new.png'   
+//import logo_new from '../assets/logo_new.png'   
 import { Link } from 'react-router-dom';
 import '../styles/footer.css';
 

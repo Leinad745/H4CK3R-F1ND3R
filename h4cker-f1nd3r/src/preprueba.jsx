@@ -33,17 +33,16 @@ export default function Preprueba() {
 
   // Función que se ejecuta al enviar el formulario
   const submitQuiz = (e) => {
-    e.preventDefault(); // Previene que la página se recargue
+    e.preventDefault();
 
     // Validar que todas estén respondidas
     for (let i = 1; i <= 10; i++) {
       if (respuestasUsuario[`q${i}`] === "") {
         alert(`Por favor responde la pregunta ${i}`);
-        return; // Detiene la función
+        return;
       }
     }
 
-    // Calcular puntaje
     let contadorCorrectas = 0;
     for (let i = 1; i <= 10; i++) {
       const idPregunta = `q${i}`;

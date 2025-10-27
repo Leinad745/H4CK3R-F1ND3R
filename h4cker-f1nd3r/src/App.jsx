@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route, Link, Outlet } from "react-router-dom";
 import { NavBar } from "./components/navbar";
 import { Index } from "./index";
 import Register from "./register";
-import Login from "./login"; // Asegúrate de tener un componente Login
+import Login from "./login";
 import Perfil from "./perfil";
 import GestorEquipo from "./equipo";
 import Calendar from "./calendar";
@@ -10,6 +10,7 @@ import Preprueba from "./preprueba";
 import RecuperarContraseña from "./recuperarContraseña";
 import Ranking from "./ranking";
 import { Footer } from "./components/footer";
+import RecuperarContraseña from "./recuperarContraseña";
 
 export default function App() {
   return (
