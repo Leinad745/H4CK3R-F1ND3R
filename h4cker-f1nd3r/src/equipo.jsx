@@ -1,4 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+
 import { useState } from "react";
 import teamLogo from "./assets/logo_team.png";
 import './styles/equipo.css';
