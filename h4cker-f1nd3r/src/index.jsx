@@ -8,108 +8,98 @@ import ranking from "./assets/ranking.png";
 export function Index() {
   const navigate = useNavigate();
   return (
-    <div>
-      <div className="row g-3 align-items-center">
-        <div className="d-flex justify-content-center">
-          <img
-            className="d-flex justify-content-center"
-            id="img-index"
-            src={img_index2}
-            alt="Logo"
-            width="auto"
-            height="auto"
-          />
+    <div className="container-fluid px-4">
+      <div className="row gy-4">
+        <div className="col-12">
+          <div className="text-center">
+            <img
+              className="img-fluid"
+              id="img-index"
+              src={img_index2}
+              alt="Logo"
+              style={{ maxWidth: "100%", height: "auto" }}
+            />
+          </div>
         </div>
-        <div>
-          <p
-            id="texto-descripcion"
-            className="d-flex justify-content-center fs-1"
-            style={{ color: "whitesmoke" }}
-          >
+        
+        <div className="col-12">
+          <h1 className="text-center text-white fs-1 px-3">
             BUSCA COMPAÑEROS PARA CTFs Y HACKATHONS SIN TEMOR!
-          </p>
+          </h1>
         </div>
-        <div className="d-flex justify-content-center gap-3">
-          <button
-            id="botones"
-            type="button"
-            className="btn btn-success"
-            style={{
-              width: 300,
-              height: 80,
-              marginTop: "1%",
-              fontSize: "1rem",
-            }}
-            onClick={() => navigate('/register')}
-          >
-            Registrate!
-          </button>
-          <button
-            id="botones"
-            type="button"
-            className="btn btn-success"
-            style={{
-              width: 300,
-              height: 80,
-              marginTop: "1%",
-              fontSize: "1rem",
-            }}
-            onClick={() => navigate('/login')}
-          >
-            Iniciar Sesión
-          </button>
+
+        <div className="col-12">
+          <div className="d-flex flex-column flex-md-row justify-content-center gap-3 px-3">
+            <button
+              className="btn btn-success btn-lg"
+              onClick={() => navigate('/register')}
+            >
+              Registrate!
+            </button>
+            <button
+              className="btn btn-success btn-lg"
+              onClick={() => navigate('/login')}
+            >
+              Iniciar Sesión
+            </button>
+          </div>
         </div>
       </div>
+
       <section className="mt-5 text-white">
-        <div className="row align-items-center mb-5">
-          <div className="col-md-6 text-center">
-            <div className="mb-3">
-            <h2>Conéctate con otros Hackers</h2>
+        <div className="row gy-4 align-items-center mb-5">
+          <div className="col-12 col-md-6 text-center">
+            <div className="px-3">
+              <h2 className="mb-3">Conéctate con otros Hackers</h2>
+              <p className="lead">
+                Busca compañeros para CTFs y Hackatones para lograr tus objetivos.
+              </p>
             </div>
-            <p>
-              Busca compañeros para CTFs y Hackatones para lograr tus objetivos.
-            </p>
           </div>
-          <div className="col-md-6 text-center">
+          <div className="col-12 col-md-6 text-center">
             <img
               src={teamwork}
               alt="Equipo hacker"
-              className="img-fluid rounded"
-              style={{ maxWidth: "100%", height: "auto" }}
+              className="img-fluid rounded shadow"
             />
           </div>
         </div>
-        <div className="row align-items-center mb-5 flex-md-row-reverse">
-          <div className="col-md-6 text-center">
-            <h2>Sin experiencia? No hay problema!</h2>
-            <p>
-              Nuestra prueba de habilidad de te ayuda a encontrar compañeros con
-              niveles similares al tuyo.
-            </p>
+
+        <div className="row gy-4 align-items-center mb-5 flex-md-row-reverse">
+          <div className="col-12 col-md-6 text-center">
+            <div className="px-3">
+              <h2 className="mb-3">Sin experiencia? No hay problema!</h2>
+              <p className="lead">
+                Nuestra prueba de habilidad te ayuda a encontrar compañeros con
+                niveles similares al tuyo.
+              </p>
+            </div>
           </div>
-          <div className="col-md-6 text-center">
+          <div className="col-12 col-md-6 text-center">
             <img
               src={skills}
               alt="Aprendizaje"
-              className="img-fluid rounded"
-              style={{ maxWidth: "100%", height: "auto" }}
+              className="img-fluid rounded shadow"
             />
           </div>
         </div>
-        <div className="row align-items-center mb-5">
-          <div className="col-md-6 text-center">
-            <h2>Compite en nuestro ranking!</h2>
-            <p>
-              Al participar en eventos y desafios y registrarlos en nuestro
-              sistema, podrás escalar posiciones en nuestro ranking y demostrar
-              tus habilidades!
-            </p>
+
+        <div className="row gy-4 align-items-center mb-5">
+          <div className="col-12 col-md-6 text-center">
+            <div className="px-3">
+              <h2 className="mb-3">Compite en nuestro ranking!</h2>
+              <p className="lead">
+                Al participar en eventos y desafíos y registrarlos en nuestro
+                sistema, podrás escalar posiciones en nuestro ranking y demostrar
+                tus habilidades!
+              </p>
+            </div>
           </div>
-          <div className="col-md-6 text-center">
+          <div className="col-12 col-md-6 text-center">
             <img
               src={ranking}
               alt="Ranking"
-              className="img-fluid rounded"
+              className="img-fluid rounded shadow"
             />
           </div>
         </div>
