@@ -20,72 +20,79 @@ export default function Register() {
     setAceptaTerminos(false);
   };
 
-  const regDatosUsuario = () => {
-    // Validaciones básicas
-    if (
-      correoElectronico === "" ||
-      nombreCompleto === "" ||
-      password === "" ||
-      passwordConfirm === "" ||
-      nombreUsuario === ""
-    ) {
-      alert("Todos los campos deben ser llenados");
-      return;
+ const regDatosUsuario = () => {
+  // Validaciones básicas
+  if (
+    correoElectronico === "" ||
+    nombreCompleto === "" ||
+    password === "" ||
+    passwordConfirm === "" ||
+    nombreUsuario === ""
+  ) {
+    alert("Todos los campos deben ser llenados");
+    return;
+  }
+
+  if (!correoElectronico.includes("@") || !correoElectronico.includes(".")) {
+    alert("Debes ingresar un correo electrónico válido (debe contener @ y .)");
+    return;
+  }
+
+  // Leer usuarios del localStorage
+  let usuarios = [];
+  try {
+    const usuariosStorage = localStorage.getItem("usuarios");
+    if (usuariosStorage && usuariosStorage !== "null") {
+      usuarios = JSON.parse(usuariosStorage);
     }
+  } catch (error) {
+    console.error("Error al obtener usuarios de localStorage:", error);
+    usuarios = [];
+  }
 
-    if (!correoElectronico.includes("@") || !correoElectronico.includes(".")) {
-      alert("Debes ingresar un correo electrónico válido (debe contener @ y .)");
-      return;
-    }
+  // Verificar si el correo ya existe
+  const existeUsuario = usuarios.some(
+    (u) => u.correoElectronico === correoElectronico
+  );
 
-    let usuarios = [];
-    try {
-      const usuariosStorage = localStorage.getItem("usuarios");
-      if (usuariosStorage && usuariosStorage !== "null") {
-        usuarios = JSON.parse(usuariosStorage);
-      }
-    } catch (error) {
-      console.error("Error al obtener usuarios de localStorage:", error);
-      usuarios = [];
-    }
+  if (existeUsuario) {
+    alert("El correo ya está registrado");
+    return;
+  }
 
-    const existeUsuario = usuarios.some(
-      (u) => u.correoElectronico === correoElectronico
-    );
+  if (password !== passwordConfirm) {
+    alert("Las contraseñas no coinciden");
+    return;
+  }
 
-    if (existeUsuario) {
-      alert("El correo ya está registrado");
-      return;
-    }
+  if (!aceptaTerminos) {
+    alert("Debes aceptar los términos y condiciones");
+    return;
+  }
 
-    if (password !== passwordConfirm) {
-      alert("Las contraseñas no coinciden");
-      return;
-    }
-
-    if (!aceptaTerminos) {
-      alert("Debes aceptar los términos y condiciones");
-      return;
-    }
-
-    const nuevoUsuario = {
-      nombreCompleto,
-      nombreUsuario,
-      correoElectronico,
-      password,
-      nivel: "",
-      edad: "",
-      ciudad: "",
-      especialidad: ""
-    };
-
-    usuarios.push(nuevoUsuario);
-    localStorage.setItem("usuarios", JSON.stringify(usuarios));
-
-    alert("Registro exitoso");
-    limpiarCampos();
-    navigate("/login"); // Redirige al login
+  // Crear nuevo usuario con ID único
+  const nuevoUsuario = {
+    id: `user-${Date.now()}`, // ID único basado en timestamp
+    nombreCompleto,
+    nombreUsuario,
+    correoElectronico,
+    password,
+    nivel: "",
+    edad: "",
+    ciudad: "",
+    especialidad: "",
+    github: "",
+    twitter: ""
   };
+
+  // Agregar usuario al array y guardar en localStorage
+  usuarios.push(nuevoUsuario);
+  localStorage.setItem("usuarios", JSON.stringify(usuarios));
+
+  alert("Registro exitoso");
+  limpiarCampos();
+  navigate("/login"); // Redirige al login
+};
 
   return (
     <div className="container mt-5">

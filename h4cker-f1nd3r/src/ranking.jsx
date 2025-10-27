@@ -1,121 +1,126 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-
+import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 export default function Ranking() {
     const [hackers, setHackers] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const hackersData = [
             {
-                id: 1,
-                username: "Blackhat_Master",
-                points: 15000,
-                level: "Expert",
-                challenges_completed: 120
+            id: "blackhat_master",
+            username: "Blackhat_Master",
+            points: 15000,
+            level: "Fl4g-Hunt3r",
+            challenges_completed: 120
             },
             {
-                id: 2,
-                username: "CyberNinja",
-                points: 12000,
-                level: "Advanced",
-                challenges_completed: 95
+            id: "cyberninja",
+            username: "CyberNinja",
+            points: 12000,
+            level: "Fl4g-Hunt3r",
+            challenges_completed: 95
             },
             {
-                id: 3,
-                username: "CodeBreaker",
-                points: 10000,
-                level: "Advanced",
-                challenges_completed: 85
+            id: "codebreaker",
+            username: "CodeBreaker",
+            points: 10000,
+            level: "R3d-T34m3r",
+            challenges_completed: 85
             },
             {
-                id: 4,
-                username: "SecurityPro",
-                points: 8000,
-                level: "Intermediate",
-                challenges_completed: 65
+            id: "securitypro",
+            username: "SecurityPro",
+            points: 8000,
+            level: "R3d-T34m3r",
+            challenges_completed: 65
             },
             {
-                id: 5,
-                username: "WhiteHat_Hero",
-                points: 7500,
-                level: "Intermediate",
-                challenges_completed: 60
+            id: "whitehat_hero",
+            username: "WhiteHat_Hero",
+            points: 7500,
+            level: "R3d-T34m3r",
+            challenges_completed: 60
             },
             {
-                id: 6,
-                username: "ByteBuster",
-                points: 7000,
-                level: "Intermediate",
-                challenges_completed: 55
+            id: "bytebuster",
+            username: "ByteBuster",
+            points: 7000,
+            level: "Scr1pt-K1dd13",
+            challenges_completed: 55
             },
             {
-                id: 7,
-                username: "CryptoKing",
-                points: 6800,
-                level: "Intermediate",
-                challenges_completed: 52
+            id: "cryptoking",
+            username: "CryptoKing",
+            points: 6800,
+            level: "Scr1pt-K1dd13",
+            challenges_completed: 52
             },
             {
-                id: 8,
-                username: "NetworkNinja",
-                points: 6500,
-                level: "Intermediate",
-                challenges_completed: 48
+            id: "networkninja",
+            username: "NetworkNinja",
+            points: 6500,
+            level: "Scr1pt-K1dd13",
+            challenges_completed: 48
             },
             {
-                id: 9,
-                username: "BinaryBoss",
-                points: 6200,
-                level: "Beginner",
-                challenges_completed: 45
+            id: "binaryboss",
+            username: "BinaryBoss",
+            points: 6200,
+            level: "Scr1pt-K1dd13",
+            challenges_completed: 45
             },
             {
-                id: 10,
-                username: "ScriptSorcerer",
-                points: 5800,
-                level: "Beginner",
-                challenges_completed: 42
+            id: "scriptsorcerer",
+            username: "ScriptSorcerer",
+            points: 5800,
+            level: "pr1nc1p14nt3",
+            challenges_completed: 42
             },
             {
-                id: 11,
-                username: "HackHunter",
-                points: 5500,
-                level: "Beginner",
-                challenges_completed: 40
+            id: "hackhunter",
+            username: "HackHunter",
+            points: 5500,
+            level: "pr1nc1p14nt3",
+            challenges_completed: 40
             },
             {
-                id: 12,
-                username: "DataDragon",
-                points: 5200,
-                level: "Beginner",
-                challenges_completed: 38
+            id: "datadragon",
+            username: "DataDragon",
+            points: 5200,
+            level: "pr1nc1p14nt3",
+            challenges_completed: 38
             },
             {
-                id: 13,
-                username: "ShellShock",
-                points: 4900,
-                level: "Beginner",
-                challenges_completed: 35
+            id: "shellshock",
+            username: "ShellShock",
+            points: 4900,
+            level: "pr1nc1p14nt3",
+            challenges_completed: 35
             },
             {
-                id: 14,
-                username: "RootRaider",
-                points: 4600,
-                level: "Beginner",
-                challenges_completed: 32
+            id: "rootraider",
+            username: "RootRaider",
+            points: 4600,
+            level: "pr1nc1p14nt3",
+            challenges_completed: 32
             },
             {
-                id: 15,
-                username: "ZeroDayZen",
-                points: 4300,
-                level: "Beginner",
-                challenges_completed: 30
+            id: "zerodayzen",
+            username: "ZeroDayZen",
+            points: 4300,
+            level: "pr1nc1p14nt3",
+            challenges_completed: 30
             }
         ];
 
         setHackers(hackersData);
     }, []);
+
+    const verPerfil = (usuarioId) => {
+        navigate(`/perfil/${usuarioId}`)
+    }
 
     return (
         <div className="container mt-5">
@@ -133,7 +138,9 @@ export default function Ranking() {
                     </thead>
                     <tbody>
                         {hackers.map((hacker, index) => (
-                            <tr key={hacker.id}>
+                            <tr key={hacker.id}
+                                onClick={() => verPerfil(hacker.id)}
+                                style={{ cursor: 'pointer'}}>
                                 <td>{index + 1}</td>
                                 <td>{hacker.username}</td>
                                 <td>{hacker.points.toLocaleString()}</td>

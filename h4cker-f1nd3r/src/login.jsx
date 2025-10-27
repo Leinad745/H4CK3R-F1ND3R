@@ -35,6 +35,7 @@ export default function Login() {
 
       if (usuarioEncontrado) {
         alert("Login exitoso");
+        window.dispatchEvent(new Event('usuarioRegistrado'));
         limpiarCampos();
         navigate("/preprueba");
       } else {
