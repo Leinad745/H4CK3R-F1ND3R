@@ -1,26 +1,32 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState, useEffect } from "react"; // Importamos useEffect para cargar datos al montar
 import perfil from "./assets/perfil.png";
+import { useParams } from "react-router-dom";
 import "./styles/perfil.css";
 
 export default function Perfil() {
-
+  const { usuarioId } = useParams();
   const [datosPerfil, setDatosPerfil] = useState({
     nombre: "John Doe",
     email: "johndoe@example.com",
     edad: "",
     ciudad: "",
     especialidad: "",
-    nivel: ""
+    nivel: "",
+    github: "",
+    twitter: ""
   });
 
   const [formData, setFormData] = useState({
     edad: "",
     ciudad: "",
-    especialidad: ""
+    especialidad: "",
+    github: "",
+    twitter: ""
   });
 
   const [mostrarModal, setMostrarModal] = useState(false);
+  const [esPropietario, setEsPropietario] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -37,7 +43,9 @@ export default function Perfil() {
       ...datosPerfil,
       edad: formData.edad || datosPerfil.edad,
       ciudad: formData.ciudad || datosPerfil.ciudad,
-      especialidad: formData.especialidad || datosPerfil.especialidad
+      especialidad: formData.especialidad || datosPerfil.especialidad,
+      github: formData.github || datosPerfil.github,
+      twitter: formData.twitter || datosPerfil.twitter
     };
 
     setDatosPerfil(cambioDatos);
@@ -55,7 +63,9 @@ export default function Perfil() {
             edad: cambioDatos.edad,
             ciudad: cambioDatos.ciudad,
             especialidad: cambioDatos.especialidad,
-            nivel: cambioDatos.nivel
+            nivel: cambioDatos.nivel,
+            github: cambioDatos.github,
+            twitter: cambioDatos.twitter
           };
           localStorage.setItem('usuarios', JSON.stringify(usuarios));
         }
@@ -68,7 +78,9 @@ export default function Perfil() {
     setFormData({
       edad: "",
       ciudad: "",
-      especialidad: ""
+      especialidad: "",
+      github: "",
+      twitter: ""
     });
 
     setMostrarModal(false);
@@ -81,7 +93,15 @@ export default function Perfil() {
         const usuarios = JSON.parse(usuariosGuardados);
         
         if (usuarios && usuarios.length > 0){
-          const usuarioActual = usuarios[usuarios.length -1];
+          let usuarioActual;
+
+          if (usuarioId) {
+            usuarioActual = usuarios.find(u => u.id === usuarioId);
+            setEsPropietario(false);
+          } else {
+            usuarioActual = usuarios[usuarios.length - 1];
+            setEsPropietario(true);
+          }
 
         if (usuarioActual) {
           setDatosPerfil({
@@ -90,7 +110,9 @@ export default function Perfil() {
             edad: usuarioActual.edad || "",
             ciudad: usuarioActual.ciudad || "",
             especialidad: usuarioActual.especialidad || "",
-            nivel: usuarioActual.nivel || "Sin nivel asignado"
+            nivel: usuarioActual.nivel || "Sin nivel asignado",
+            github: usuarioActual.github || "www.github.com/ejemplo",
+            twitter: usuarioActual.twitter || "@Twitter"
           });
         }
       }
@@ -98,7 +120,7 @@ export default function Perfil() {
   } catch (error) {
       console.log("Error al cargar datos",error)
     }
-  }, []);
+  }, [usuarioId]);
   return (
     <main>
       <div className="container">
@@ -148,8 +170,8 @@ export default function Perfil() {
                       </svg>
                       Github
                     </h6>
-                    <span className="text-secondary">
-                      www.github.com/ejemplo
+                    <span id="github" className="text-secondary">
+                      {datosPerfil.github}
                     </span>
                   </li>
                   <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
@@ -165,21 +187,10 @@ export default function Perfil() {
                       </svg>
                       Twitter
                     </h6>
-                    <span className="text-secondary">@Twitter</span>
+                    <span className="text-secondary" id="twitter" >{datosPerfil.twitter}</span>
                   </li>
                 </ul>
               </div>
-              <div className="row">
-                    <div className="col-sm-12">
-                      <button
-                        type="button"
-                        className="btn btn-primary"
-                        onClick={() => setMostrarModal(true)}
-                      >
-                        Editar
-                      </button>
-                    </div>
-                  </div>
             </div>
             <div className="col-md-8">
               <div className="card mb-3">
@@ -228,7 +239,7 @@ export default function Perfil() {
                     </div>
                   </div>
                   <hr />
-                  <div className="row">
+                  {esPropietario && (<div className="row">
                     <div className="col-sm-12">
                       <button
                         type="button"
@@ -238,14 +249,14 @@ export default function Perfil() {
                         Editar
                       </button>
                     </div>
-                  </div>
+                  </div>)}
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      {mostrarModal && (
+      {mostrarModal && esPropietario (
         <div 
           style={{
             position: 'fixed',
@@ -327,6 +338,46 @@ export default function Perfil() {
                   className="form-control"
                   placeholder={datosPerfil.especialidad}
                   value={formData.especialidad}
+                  onChange={handleInputChange}
+                  style={{
+                    backgroundColor: '#2a2a2a',
+                    color: 'white',
+                    border: '1px solid #444',
+                    padding: '10px'
+                  }}
+                />
+              </div>
+
+              <div style={{ marginBottom: '25px' }}>
+                <label style={{ color: 'white', display: 'block', marginBottom: '8px' }}>
+                  Github
+                </label>
+                <input
+                  type="text"
+                  name="github"
+                  className="form-control"
+                  placeholder={datosPerfil.github}
+                  value={formData.github}
+                  onChange={handleInputChange}
+                  style={{
+                    backgroundColor: '#2a2a2a',
+                    color: 'white',
+                    border: '1px solid #444',
+                    padding: '10px'
+                  }}
+                />
+              </div>
+
+                            <div style={{ marginBottom: '25px' }}>
+                <label style={{ color: 'white', display: 'block', marginBottom: '8px' }}>
+                  Twitter
+                </label>
+                <input
+                  type="text"
+                  name="twitter"
+                  className="form-control"
+                  placeholder={datosPerfil.twitter}
+                  value={formData.twitter}
                   onChange={handleInputChange}
                   style={{
                     backgroundColor: '#2a2a2a',

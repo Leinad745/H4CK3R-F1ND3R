@@ -21,6 +21,7 @@ export default function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/perfil" element={<Perfil />} />
+          <Route path="/perfil/:usuarioId" element={<Perfil />} />
           <Route path="/equipo" element={<GestorEquipo />} />
           <Route path="/calendario" element={<Calendar />} />
           <Route path="/preprueba" element={<Preprueba />} />

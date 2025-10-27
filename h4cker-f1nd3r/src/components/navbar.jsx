@@ -2,9 +2,36 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import logo_new from '../assets/logo_new.png'
 import { Link } from 'react-router-dom';
-import Perfil from '../perfil';
+import { useState, useEffect } from 'react';
 
 export function NavBar() {
+  const [hayUsuario, setHayUsuario] = useState(false);
+
+  useEffect(() => {
+    const verificarUsuario = () => {
+      const usuariosGuardados = localStorage.getItem('usuarios');
+      
+      if (usuariosGuardados) {
+        try {
+          const usuarios = JSON.parse(usuariosGuardados);
+          setHayUsuario(usuarios && usuarios.length > 0);
+        } catch (error) {
+          console.error('Error al leer usuarios:', error);
+          setHayUsuario(false);
+        }
+      } else {
+        setHayUsuario(false);
+      }
+    };
+
+    verificarUsuario();
+
+    window.addEventListener('storage', verificarUsuario);
+    
+    return () => window.removeEventListener('storage', verificarUsuario);
+  }, []);
+
+
 return (
     <nav className="navbar navbar-expand-lg">
       <div className="container-fluid">
@@ -28,16 +55,17 @@ return (
         <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
           
           <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-            
-            <li className="nav-item">
-              <Link to="/perfil"> 
-                <button className="cssbuttons-io" onClick={Perfil}>
-                  <span>
-                    Perfil
-                  </span>
-                </button>
-              </Link>
-            </li>
+            {hayUsuario && (
+              <li className="nav-item">
+                <Link to="/perfil"> 
+                  <button className="cssbuttons-io">
+                    <span>
+                      Perfil
+                    </span>
+                  </button>
+                </Link>
+              </li>
+            )}
             
             <li className="nav-item">
               <Link to="/equipo">
