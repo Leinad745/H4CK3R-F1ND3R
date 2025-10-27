@@ -256,7 +256,7 @@ export default function Perfil() {
           </div>
         </div>
       </div>
-      {mostrarModal && esPropietario (
+      {mostrarModal && esPropietario && (
         <div 
           style={{
             position: 'fixed',
