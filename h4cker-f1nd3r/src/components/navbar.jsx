@@ -6,6 +6,8 @@ import { useState, useEffect } from 'react';
 import '../styles/navbar.css';
 
 export function NavBar() {
+
+  // 
   const [hayUsuario, setHayUsuario] = useState(false);
 
   useEffect(() => {
