@@ -3,6 +3,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import logo_new from '../assets/logo_new.png'
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import '../styles/navbar.css';
 
 export function NavBar() {
   const [hayUsuario, setHayUsuario] = useState(false);
@@ -92,6 +93,15 @@ return (
                 <button className="cssbuttons-io" >
                   <span>
                     Ranking
+                  </span>
+                </button>
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/perfil">
+                <button className="cssbuttons-io">
+                  <span>
+                    Perfil
                   </span>
                 </button>
               </Link>
