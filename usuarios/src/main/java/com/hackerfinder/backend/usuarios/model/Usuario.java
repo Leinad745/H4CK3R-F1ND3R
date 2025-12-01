@@ -35,5 +35,5 @@ public class Usuario {
     private String contrasena;
 
     @Column(nullable = false)
-    private int puntaje = 0;
+    private Integer puntaje = 0;
 }
