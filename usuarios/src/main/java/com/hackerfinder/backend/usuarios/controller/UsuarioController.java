@@ -55,7 +55,11 @@ public class UsuarioController {
     public ResponseEntity<Usuario> findByid(@PathVariable Long id) {
         try {
             Usuario usuario = usuarioService.findById(id);
-            return ResponseEntity.ok(usuario);
+            if (usuario == null) {
+                return ResponseEntity.notFound().build();
+            } else {
+                return ResponseEntity.ok(usuario);
+            }
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
@@ -65,7 +69,11 @@ public class UsuarioController {
     public ResponseEntity<Usuario> findByUsername(@PathVariable String username) {
         try {
             Usuario usuario = usuarioService.findByUsername(username);
-            return ResponseEntity.ok(usuario);
+            if (usuario == null) {
+                return ResponseEntity.notFound().build();
+            } else {
+                return ResponseEntity.ok(usuario);
+            }
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }

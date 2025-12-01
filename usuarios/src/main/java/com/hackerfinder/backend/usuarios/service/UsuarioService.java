@@ -23,6 +23,7 @@ public class UsuarioService {
     }
 
     public Usuario saveUsuario(Usuario usuario) {
+        usuario.setPuntaje(0);
         return usuarioRepository.save(usuario);
     }
 
