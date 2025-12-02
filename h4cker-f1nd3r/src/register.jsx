@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { registrarUsuario } from "./services/usuarioService";
+import { registrarUsuario, obtenerUsuarioPorId } from "./services/usuarioService";
 
 export default function Register() {
   const [nombreCompleto, setNombreCompleto] = useState("");
@@ -62,6 +62,9 @@ export default function Register() {
     try {
       setLoading(true);
       const usuarioRegistrado = await registrarUsuario(nuevoUsuario);
+      const usuarioCompleto = await obtenerUsuarioPorId(usuarioRegistrado.idUsuario);
+      localStorage.setItem("usuario", JSON.stringify(usuarioCompleto));
+      localStorage.setItem("isAuthenticated", "true");
       alert("Registro exitoso");
       limpiarCampos();
       localStorage.setItem("usuario", JSON.stringify(usuarioRegistrado))
@@ -76,7 +79,7 @@ export default function Register() {
         } else {
           alert(
             "Error al registrar: " +
-              (error.response.data.message || error.reponse.data)
+            (error.response.data.message || error.reponse.data)
           );
         }
       } else if (error.request) {
@@ -216,7 +219,7 @@ export default function Register() {
 
                 <div className="d-grid gap-2">
                   <button type="submit" className="btn btn-primary" disabled={loading}>
-                    {loading ? "Registrando...":"Registrarse"}
+                    {loading ? "Registrando..." : "Registrarse"}
                   </button>
                   <Link to="/login" className="btn btn-link">
                     ¿Ya tienes cuenta? Inicia sesión
