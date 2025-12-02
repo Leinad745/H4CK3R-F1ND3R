@@ -119,7 +119,7 @@ export default function GestorEquipo() {
                                             <tbody>
                                                 {equipoData.miembros.map(miembro => (
                                                     <tr key={miembro.id}>
-                                                        <td>
+                                                        <td data-label="Nombre">
                                                             <div className="d-flex align-items-center">
                                                                 <div className="avatar-circle">
                                                                     {miembro.nombre.charAt(0)}
@@ -127,19 +127,19 @@ export default function GestorEquipo() {
                                                                 <span className="ms-2">{miembro.nombre}</span>
                                                             </div>
                                                         </td>
-                                                        <td>
+                                                        <td data-label="Rol">
                                                             <span className={`badge ${
                                                                 miembro.rol === "Líder" ? "bg-danger" : "bg-info"
                                                             }`}>
                                                                 {miembro.rol}
                                                             </span>
                                                         </td>
-                                                        <td>
+                                                        <td data-label="Especialidad">
                                                             <span className="specialty-tag">
                                                                 {miembro.especialidad}
                                                             </span>
                                                         </td>
-                                                        <td>
+                                                        <td data-label="Acciones">
                                                             <button
                                                                 className="btn btn-outline-danger btn-sm"
                                                                 onClick={() => eliminarMiembro(miembro.id)}

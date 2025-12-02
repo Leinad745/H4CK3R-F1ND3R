@@ -55,7 +55,7 @@ describe('Navbar', () => {
     //atributos
     it('Atributos href', () => {
         expect(screen.getByRole(ln, { name: /perfil/i })).toHaveAttribute('href', '/perfil');
-        expect(screen.getByRole(ln, { name: /equipo/i })).toHaveAttribute('href', '/equipos');
+        expect(screen.getByRole(ln, { name: /equipo/i })).toHaveAttribute('href', '/equipo');
         expect(screen.getByRole(ln, { name: /calendario/i })).toHaveAttribute('href', '/calendario');
     });
 
