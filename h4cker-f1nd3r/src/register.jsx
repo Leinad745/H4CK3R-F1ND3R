@@ -61,12 +61,10 @@ export default function Register() {
     };
     try {
       setLoading(true);
-      await registrarUsuario(nuevoUsuario);
+      const usuarioRegistrado = await registrarUsuario(nuevoUsuario);
       alert("Registro exitoso");
       limpiarCampos();
-
-      // BUSCAR COMO PUEDO MANTENER LA SESION INICIADA DESPUES DE REGISTRARME
-
+      localStorage.setItem("usuario", JSON.stringify(usuarioRegistrado))
       window.dispatchEvent(new Event("usuarioRegistrado"));
       navigate("/login");
     } catch (error) {
