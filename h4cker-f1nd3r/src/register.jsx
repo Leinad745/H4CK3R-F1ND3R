@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { registrarUsuario } from "./services/usuarioService";
+import { registrarUsuario } from "../services/userServices";
 
 export default function Register() {
   const [nombreCompleto, setNombreCompleto] = useState("");
