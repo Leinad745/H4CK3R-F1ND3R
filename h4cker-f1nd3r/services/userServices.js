@@ -1,6 +1,5 @@
 import { apiClient } from "./api";
 
-
 export const registrarUsuario = async (usuario) => {
     const response = await apiClient.post('/usuarios/register', usuario);
     return response.data;
