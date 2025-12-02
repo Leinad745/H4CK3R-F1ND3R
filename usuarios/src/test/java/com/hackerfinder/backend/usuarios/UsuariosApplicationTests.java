@@ -31,17 +31,14 @@ class UsuariosApplicationTests {
 
 	@Test
 	void testRegister() {
-		// Arrange
-		Usuario newUser = new Usuario(null, "newuser", "New User", "new@test.com", "password123", 0);
-		Usuario savedUser = new Usuario(1L, "newuser", "New User", "new@test.com", "password123", 0);
+		Usuario nuevoUsuario = new Usuario(null, "newuser", "New User", "new@test.com", "password123", 0);
+		Usuario savedUsuario = new Usuario(1L, "newuser", "New User", "new@test.com", "password123", 0);
 
 		when(usuarioService.findByUsername("newuser")).thenReturn(null);
-		when(usuarioService.saveUsuario(any(Usuario.class))).thenReturn(savedUser);
+		when(usuarioService.saveUsuario(any(Usuario.class))).thenReturn(savedUsuario);
 
-		// Act
-		ResponseEntity<Usuario> response = usuarioController.register(newUser);
+		ResponseEntity<Usuario> response = usuarioController.register(nuevoUsuario);
 
-		// Assert
 		assertEquals(HttpStatus.CREATED, response.getStatusCode());
 		assertNotNull(response.getBody());
 		assertEquals(1L, response.getBody().getIdUsuario());
@@ -50,19 +47,15 @@ class UsuariosApplicationTests {
 
 	@Test
 	void testLogin() {
-		// Arrange
 		Usuario loginRequest = new Usuario();
 		loginRequest.setUsername("existinguser");
 		loginRequest.setContrasena("password123");
 
-		Usuario existingUser = new Usuario(1L, "existinguser", "Existing User", "existing@test.com", "password123", 0);
+		Usuario existeUsuario = new Usuario(1L, "existinguser", "Existing User", "existing@test.com", "password123", 0);
 
-		when(usuarioService.inicioSesion("existinguser", "password123")).thenReturn(existingUser);
+		when(usuarioService.inicioSesion("existinguser", "password123")).thenReturn(existeUsuario);
 
-		// Act
 		ResponseEntity<Usuario> response = usuarioController.login(loginRequest);
-
-		// Assert
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertNotNull(response.getBody());
 		assertEquals("existinguser", response.getBody().getUsername());
