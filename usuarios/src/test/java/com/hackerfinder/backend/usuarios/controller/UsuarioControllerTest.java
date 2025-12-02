@@ -30,7 +30,7 @@ public class UsuarioControllerTest {
 
     @BeforeEach
     void setUp(){
-        usuario = new Usuario(1L, "testuser", "Test User", "test@test.com","testpassword123", 0);
+        usuario = new Usuario(1L, "testuser", "Test User", "test@test.com","testpassword123", null, 0);
 
     }
 
@@ -39,7 +39,7 @@ public class UsuarioControllerTest {
         when(usuarioService.findByUsername("testuser")).thenReturn(null);
         when(usuarioService.saveUsuario(any(Usuario.class))).thenReturn(usuario);
 
-        String userJson = "{\"username\":\"testuser\", \"nombreReal\":\"Test User\", \"email\":\"test@test.com\", \"contrasena\":\"testpassword123\", \"puntaje\": 0}";
+        String userJson = "{\"username\":\"testuser\", \"nombreReal\":\"Test User\", \"email\":\"test@test.com\", \"contrasena\":\"testpassword123\", \"titulo\": null, \"puntaje\": 0}";
 
         mockMvc.perform(post("/api/usuarios/register")
                 .contentType(MediaType.APPLICATION_JSON)
