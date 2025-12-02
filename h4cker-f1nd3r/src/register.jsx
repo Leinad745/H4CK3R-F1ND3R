@@ -1,6 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { registrarUsuario } from "./services/usuarioService";
 
 export default function Register() {
   const [nombreCompleto, setNombreCompleto] = useState("");
@@ -9,6 +10,7 @@ export default function Register() {
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [aceptaTerminos, setAceptaTerminos] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const limpiarCampos = () => {
@@ -20,79 +22,72 @@ export default function Register() {
     setAceptaTerminos(false);
   };
 
- const regDatosUsuario = () => {
-  // Validaciones básicas
-  if (
-    correoElectronico === "" ||
-    nombreCompleto === "" ||
-    password === "" ||
-    passwordConfirm === "" ||
-    nombreUsuario === ""
-  ) {
-    alert("Todos los campos deben ser llenados");
-    return;
-  }
-
-  if (!correoElectronico.includes("@") || !correoElectronico.includes(".")) {
-    alert("Debes ingresar un correo electrónico válido (debe contener @ y .)");
-    return;
-  }
-
-  // Leer usuarios del localStorage
-  let usuarios = [];
-  try {
-    const usuariosStorage = localStorage.getItem("usuarios");
-    if (usuariosStorage && usuariosStorage !== "null") {
-      usuarios = JSON.parse(usuariosStorage);
+  const regDatosUsuario = async () => {
+    // Validaciones básicas
+    if (
+      correoElectronico === "" ||
+      nombreCompleto === "" ||
+      password === "" ||
+      passwordConfirm === "" ||
+      nombreUsuario === ""
+    ) {
+      alert("Todos los campos deben ser llenados");
+      return;
     }
-  } catch (error) {
-    console.error("Error al obtener usuarios de localStorage:", error);
-    usuarios = [];
-  }
 
-  // Verificar si el correo ya existe
-  const existeUsuario = usuarios.some(
-    (u) => u.correoElectronico === correoElectronico
-  );
+    if (!correoElectronico.includes("@") || !correoElectronico.includes(".")) {
+      alert(
+        "Debes ingresar un correo electrónico válido (debe contener @ y .)"
+      );
+      return;
+    }
 
-  if (existeUsuario) {
-    alert("El correo ya está registrado");
-    return;
-  }
+    if (password !== passwordConfirm) {
+      alert("Las contraseñas no coinciden");
+      return;
+    }
 
-  if (password !== passwordConfirm) {
-    alert("Las contraseñas no coinciden");
-    return;
-  }
+    if (!aceptaTerminos) {
+      alert("Debes aceptar los términos y condiciones");
+      return;
+    }
 
-  if (!aceptaTerminos) {
-    alert("Debes aceptar los términos y condiciones");
-    return;
-  }
+    // Crear nuevo usuario con ID único
+    const nuevoUsuario = {
+      username: nombreUsuario,
+      nombreReal: nombreCompleto,
+      contrasena: password,
+      email: correoElectronico,
+    };
+    try {
+      setLoading(true);
+      await registrarUsuario(nuevoUsuario);
+      alert("Registro exitoso");
+      limpiarCampos();
 
-  // Crear nuevo usuario con ID único
-  const nuevoUsuario = {
-    id: `user-${Date.now()}`, // ID único basado en timestamp
-    nombreCompleto,
-    nombreUsuario,
-    correoElectronico,
-    password,
-    nivel: "",
-    edad: "",
-    ciudad: "",
-    especialidad: "",
-    github: "",
-    twitter: ""
+      // BUSCAR COMO PUEDO MANTENER LA SESION INICIADA DESPUES DE REGISTRARME
+
+      window.dispatchEvent(new Event("usuarioRegistrado"));
+      navigate("/login");
+    } catch (error) {
+      console.error("Error al registrar usuario:", error);
+
+      if (error.response) {
+        if (error.response.status === 409 || error.response.status === 400) {
+          alert("El nombre de usuario o correo electrónico ya están en uso.");
+        } else {
+          alert(
+            "Error al registrar: " +
+              (error.response.data.message || error.reponse.data)
+          );
+        }
+      } else if (error.request) {
+        alert("Sin conexion al servidor");
+      }
+    } finally {
+      setLoading(false);
+    }
   };
-
-  // Agregar usuario al array y guardar en localStorage
-  usuarios.push(nuevoUsuario);
-  localStorage.setItem("usuarios", JSON.stringify(usuarios));
-
-  alert("Registro exitoso");
-  limpiarCampos();
-  navigate("/login"); // Redirige al login
-};
 
   return (
     <div className="container mt-5">
@@ -222,8 +217,8 @@ export default function Register() {
                 </div>
 
                 <div className="d-grid gap-2">
-                  <button type="submit" className="btn btn-primary">
-                    Registrar
+                  <button type="submit" className="btn btn-primary" disabled={loading}>
+                    {loading ? "Registrando...":"Registrarse"}
                   </button>
                   <Link to="/login" className="btn btn-link">
                     ¿Ya tienes cuenta? Inicia sesión
