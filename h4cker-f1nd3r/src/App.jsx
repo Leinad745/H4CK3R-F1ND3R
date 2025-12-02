@@ -10,6 +10,7 @@ import Preprueba from "./preprueba";
 import RecuperarContraseña from "./recuperarContraseña";
 import Ranking from "./ranking";
 import { Footer } from "./components/footer";
+import Foro from "./Foro";
 
 export default function App() {
   return (
@@ -27,6 +28,7 @@ export default function App() {
           <Route path="/preprueba" element={<Preprueba />} />
           <Route path="/recuperarContraseña" element={<RecuperarContraseña />} />
           <Route path="/ranking" element={<Ranking />} />
+          <Route path="/foro" element={<Foro />} />
         </Routes>
         <Outlet />
       </main>
