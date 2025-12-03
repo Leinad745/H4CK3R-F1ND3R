@@ -3,10 +3,18 @@ body {
     margin: 0;
     padding: 0;
     background-image: url('../assets/bg.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
+    background-size: 100% auto;  /* Ajustar al ancho completo */
+    background-repeat: repeat-y;  /* Repetir verticalmente */
     background-position: center;
-    background-attachment: fixed;
+    background-attachment: scroll;
+}
+
+html, body {
+    height: 100%;
+}
+
+#root {
+    min-height: 100vh;
 }
 
 .navbar .container-fluid {

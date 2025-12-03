@@ -16,6 +16,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     @Query(value = "SELECT * FROM usuario WHERE username = ?1 AND contrasena = ?2", nativeQuery = true)
     public Usuario validarCredenciales(String username, String contrasena);
 
-    @Query(value = "SELECT username, puntaje FROM usuario ORDER BY puntaje DESC LIMIT 10", nativeQuery = true)
-    public List<Object[]> obtenerTop10UsuariosPorPuntaje();
+    @Query(value = "SELECT * FROM usuario ORDER BY puntaje DESC LIMIT 10", nativeQuery = true)
+    public List<Usuario> obtenerTop10UsuariosPorPuntaje();
 }
