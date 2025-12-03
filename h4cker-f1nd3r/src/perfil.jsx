@@ -1,8 +1,10 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useState, useEffect } from "react"; // Importamos useEffect para cargar datos al montar
+import { useState, useEffect, use } from "react"; // Importamos useEffect para cargar datos al montar
 import perfil from "./assets/perfil.png";
 import { useParams } from "react-router-dom";
 import "./styles/perfil.css";
+import { obtenerUsuarioPorId } from "../services/userServices";
+
 
 export default function Perfil() {
   const { usuarioId } = useParams();
@@ -14,7 +16,8 @@ export default function Perfil() {
     especialidad: "",
     nivel: "",
     github: "",
-    twitter: ""
+    twitter: "",
+    puntaje: 0
   });
 
   const [formData, setFormData] = useState({
@@ -27,17 +30,17 @@ export default function Perfil() {
 
   const [mostrarModal, setMostrarModal] = useState(false);
   const [esPropietario, setEsPropietario] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    
     setFormData(prev => ({
       ...prev,
       [name]: value
     }));
   };
 
-  const handleGuardarPerfil = (e) => {
+  const handleGuardarPerfil = async (e) => {
     e.preventDefault();
     const cambioDatos = {
       ...datosPerfil,
