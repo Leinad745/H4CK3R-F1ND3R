@@ -24,3 +24,8 @@ export const obtenerTop10 = async () => {
     const response = await apiClient.get('/usuarios/top10');
     return response.data;
 };
+
+export const actualizarTitulo = async (idUsuario, titulo) => {
+    const response = await apiClient.patch(`/usuarios/${idUsuario}/titulo`, { titulo });
+    return response.data;
+};
