@@ -1,27 +1,34 @@
 .foro-container {
-  max-width: 1200px;
+  max-width: 100%;
+  width: 100%;
   margin: 0 auto;
-  padding: 20px;
+  padding: 20px 40px;
 }
 
 .foro-header {
   margin-bottom: 32px;
   text-align: center;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
 }
 
 .foro-header h1 {
   margin: 0 0 8px 0;
-  font-size: 32px;
-  font-weight: 700;
-  color: #24292e;
+  font-size: 42px;
+  font-weight: 800;
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  letter-spacing: -0.5px;
 }
 
 .foro-header p {
-  margin: 0 0 16px 0;
-  font-size: 16px;
-  color: #586069;
+  margin: 0 0 20px 0;
+  font-size: 18px;
+  color: #f0f0f0;
+  font-weight: 300;
 }
-
 .btn-crear-publicacion {
   padding: 10px 24px;
   background-color: #28a745;
@@ -40,17 +47,21 @@
 
 .foro-content {
   display: grid;
-  grid-template-columns: 1fr 320px;
+  grid-template-columns: 1fr 300px;
   gap: 24px;
+  width: 100%;
 }
 
 .foro-main {
   min-width: 0;
+  width: 100%;
 }
 
 .publicaciones-list {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  width: 100%;
 }
 
 /* SIDEBAR */
@@ -107,17 +118,76 @@
   font-size: 12px;
 }
 
+/* MODAL */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #00000099;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #49384b;
+  border-radius: 8px;
+  padding: 24px;
+  max-width: 600px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content h2 {
+  margin: 0 0 20px 0;
+  font-size: 24px;
+  color: #ffffff;
+}
+
 /* RESPONSIVE */
-@media (max-width: 1024px) {
+@media (max-width: 1600px) {
+  .foro-container {
+    padding: 20px 30px;
+  }
+  
+  .publicaciones-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 1200px) {
+  .foro-container {
+    padding: 20px 20px;
+  }
+  
   .foro-content {
     grid-template-columns: 1fr 280px;
-    gap: 20px;
+  }
+  
+  .publicaciones-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .foro-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .publicaciones-list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
   }
 }
 
 @media (max-width: 768px) {
   .foro-container {
-    padding: 12px;
+    padding: 16px;
   }
 
   .foro-header h1 {
@@ -128,9 +198,9 @@
     font-size: 14px;
   }
 
-  .foro-content {
+  .publicaciones-list {
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 12px;
   }
 
   .foro-sidebar {
@@ -148,7 +218,7 @@
 
 @media (max-width: 480px) {
   .foro-container {
-    padding: 8px;
+    padding: 12px;
   }
 
   .foro-header h1 {
