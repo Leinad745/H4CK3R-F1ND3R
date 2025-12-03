@@ -71,6 +71,16 @@ return (
             )}
             
             <li className="nav-item">
+              <Link to="/foro">
+                <button className="cssbuttons-io">
+                  <span>
+                    Foro
+                  </span>
+                </button>
+              </Link>
+            </li>
+            
+            <li className="nav-item">
               <Link to="/equipo">
                 <button className="cssbuttons-io">
                   <span>
@@ -95,15 +105,6 @@ return (
                 <button className="cssbuttons-io" >
                   <span>
                     Ranking
-                  </span>
-                </button>
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/perfil">
-                <button className="cssbuttons-io">
-                  <span>
-                    Perfil
                   </span>
                 </button>
               </Link>

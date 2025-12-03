@@ -1,0 +1,165 @@
+.foro-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.foro-header {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.foro-header h1 {
+  margin: 0 0 8px 0;
+  font-size: 32px;
+  font-weight: 700;
+  color: #24292e;
+}
+
+.foro-header p {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  color: #586069;
+}
+
+.btn-crear-publicacion {
+  padding: 10px 24px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-crear-publicacion:hover {
+  background-color: #218838;
+}
+
+.foro-content {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 24px;
+}
+
+.foro-main {
+  min-width: 0;
+}
+
+.publicaciones-list {
+  display: flex;
+  flex-direction: column;
+}
+
+/* SIDEBAR */
+.foro-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sidebar-card {
+  background: white;
+  border: 1px solid #e1e4e8;
+  border-radius: 6px;
+  padding: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.sidebar-card h3 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #24292e;
+}
+
+.sidebar-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-card li {
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.sidebar-card li:last-child {
+  border-bottom: none;
+}
+
+.sidebar-card a {
+  color: #0366d6;
+  text-decoration: none;
+  font-size: 13px;
+  transition: color 0.2s ease;
+}
+
+.sidebar-card a:hover {
+  color: #0250bb;
+  text-decoration: underline;
+}
+
+.reglas li {
+  color: #586069;
+  font-size: 12px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .foro-content {
+    grid-template-columns: 1fr 280px;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .foro-container {
+    padding: 12px;
+  }
+
+  .foro-header h1 {
+    font-size: 24px;
+  }
+
+  .foro-header p {
+    font-size: 14px;
+  }
+
+  .foro-content {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .foro-sidebar {
+    gap: 16px;
+  }
+
+  .sidebar-card {
+    padding: 12px;
+  }
+
+  .btn-crear-publicacion {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .foro-container {
+    padding: 8px;
+  }
+
+  .foro-header h1 {
+    font-size: 20px;
+  }
+
+  .sidebar-card h3 {
+    font-size: 13px;
+  }
+
+  .sidebar-card a {
+    font-size: 12px;
+  }
+}
