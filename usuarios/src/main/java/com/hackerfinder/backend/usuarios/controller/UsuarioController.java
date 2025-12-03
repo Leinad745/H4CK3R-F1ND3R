@@ -84,8 +84,8 @@ public class UsuarioController {
     
 
     @GetMapping("/top10")
-    public ResponseEntity<List<Object[]>> getTop10UsersByScore() {
-        List<Object[]> topUsers = usuarioService.obtenerTop10UsuariosPorPuntaje();
+    public ResponseEntity<List<Usuario>> getTop10UsersByScore() {
+        List<Usuario> topUsers = usuarioService.obtenerTop10UsuariosPorPuntaje();
         if (topUsers.isEmpty()) {
             return ResponseEntity.noContent().build();
         }

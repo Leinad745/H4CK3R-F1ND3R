@@ -39,7 +39,7 @@ public class UsuarioService {
         usuarioRepository.deleteById(id);
     }
 
-    public List<Object[]> obtenerTop10UsuariosPorPuntaje() {
+    public List<Usuario> obtenerTop10UsuariosPorPuntaje() {
         return usuarioRepository.obtenerTop10UsuariosPorPuntaje();
     }
 
