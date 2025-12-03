@@ -42,4 +42,11 @@ public class UsuarioService {
     public List<Object[]> obtenerTop10UsuariosPorPuntaje() {
         return usuarioRepository.obtenerTop10UsuariosPorPuntaje();
     }
+
+    public Usuario actualizarTitulo(Long idUsuario, String nuevoTitulo) {
+        Usuario usuario = usuarioRepository.findById(idUsuario)
+            .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ID: " + idUsuario));
+        usuario.setTitulo(nuevoTitulo);
+        return usuarioRepository.save(usuario);
+    }
 }
