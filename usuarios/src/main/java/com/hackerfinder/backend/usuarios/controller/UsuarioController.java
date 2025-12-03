@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import com.hackerfinder.backend.usuarios.service.UsuarioService;
 import com.hackerfinder.backend.usuarios.model.Usuario;
 import java.util.List;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
