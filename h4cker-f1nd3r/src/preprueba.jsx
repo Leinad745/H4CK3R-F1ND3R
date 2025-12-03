@@ -6,6 +6,7 @@ import script_kiddie from "./assets/script_kiddie.png";
 import red_teamer from "./assets/red_teamer.png";
 import flag_hunter from "./assets/flag_hunter.png";
 import { useNavigate } from "react-router-dom";
+import { actualizarTitulo } from "../services/userServices";
 
 const respuestasCorrectas = {
   q1: "rce", q2: "five", q3: "hydra", q4: "all", q5: "mm",
@@ -19,7 +20,7 @@ export default function Preprueba() {
   });
 
   const [resultado, setResultado] = useState(null);
-  
+  const [loading, setLoading] = useState(false);
   const [mostrarResultado, setMostrarResultado] = useState(false);
   const navigate = useNavigate();
 
@@ -32,7 +33,7 @@ export default function Preprueba() {
   };
 
   // Función que se ejecuta al enviar el formulario
-  const submitQuiz = (e) => {
+  const submitQuiz = async (e) => {
     e.preventDefault();
 
     // Validar que todas estén respondidas
@@ -73,18 +74,47 @@ export default function Preprueba() {
       mensaje = "¡Felicidades! Tu nivel es Fl4g-Hunt3r. Eres un experto en ciberseguridad.";
       imagen = flag_hunter;
     }
+    try {
+     const usuarioStr = localStorage.getItem('usuario');
+      if (!usuarioStr) {
+        alert("No hay sesión activa. Por favor inicia sesión.");
+        navigate('/login');
+        return;
+      }
 
-    const usuariosStr = localStorage.getItem('usuarios');
-    if (usuariosStr) {
-        const usuarios = JSON.parse(usuariosStr);
-        if (usuarios.length > 0) {
-            usuarios[usuarios.length - 1].nivel = nivel;
-            localStorage.setItem('usuarios', JSON.stringify(usuarios));
+      const usuario = JSON.parse(usuarioStr);
+
+      // Actualizar título en el backend
+      const usuarioActualizado = await actualizarTitulo(usuario.idUsuario, nivel);
+      
+      console.log("Usuario actualizado desde backend:", usuarioActualizado);
+
+      // Actualizar localStorage con los datos del backend
+      localStorage.setItem('usuario', JSON.stringify(usuarioActualizado));
+
+      setResultado({ nivel, mensaje, imagen });
+      setMostrarResultado(true);
+    } catch (error) {
+      console.error("Error al actualizar el título:", error);
+      
+      if (error.response) {
+        if (error.response.status === 404) {
+          alert("Usuario no encontrado en el servidor");
+        } else {
+          alert("Error al actualizar el título: " + (error.response.data.message || error.response.data));
         }
+      } else if (error.request) {
+        alert("Sin conexión al servidor. El título no se ha guardado.");
+      } else {
+        alert("Error inesperado: " + error.message);
+      }
+      
+      // Aún mostrar el resultado aunque falle la actualización
+      setResultado({ nivel, mensaje, imagen });
+      setMostrarResultado(true);
+    } finally {
+      setLoading(false);
     }
-
-    setResultado({ nivel, mensaje, imagen });
-    setMostrarResultado(true);
   };
 
   return (
@@ -292,7 +322,7 @@ export default function Preprueba() {
         </div>
 
         {mostrarResultado && (
-          <div id="overlay" st7>
+          <div id="overlay">
             <h1>Tu nivel es: {resultado.nivel}</h1>
             <p>{resultado.mensaje}</p>
             <img src={resultado.imagen} alt={resultado.nivel} />

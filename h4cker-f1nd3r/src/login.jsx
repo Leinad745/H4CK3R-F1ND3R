@@ -1,46 +1,64 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { loginUsuario as loginAPI, obtenerUsuarioPorId } from "../services/userServices";
 
 export default function Login() {
-  const [correoElectronicoLogin, setCorreoElectronicoLogin] = useState("");
-  const [passwordLogin, setPasswordLogin] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const limpiarCampos = () => {
-    setCorreoElectronicoLogin("");
-    setPasswordLogin("");
+    setUsername("");
+    setPassword("");
   };
 
-  const loginUsuario = () => {
-    if (correoElectronicoLogin === "" || passwordLogin === "") {
+  const handleLogin = async () => {
+    if (username === "" || password === "") {
       alert("Todos los campos deben ser llenados");
       return;
-    } else if (
-      !correoElectronicoLogin.includes("@") ||
-      !correoElectronicoLogin.includes(".")
-    ) {
-      alert("Debes ingresar un correo electrónico válido (debe contener @ y .)");
-      return;
-    } else if (correoElectronicoLogin.length < 3 || passwordLogin.length < 3) {
+    } 
+    
+    if (username.length < 3 || password.length < 3) {
       alert("Los campos deben tener al menos 3 caracteres");
       return;
-    } else {
-      let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
-      let usuarioEncontrado = usuarios.find(
-        (u) =>
-          u.correoElectronico === correoElectronicoLogin &&
-          u.password === passwordLogin
-      );
+    }
 
-      if (usuarioEncontrado) {
-        alert("Login exitoso");
-        window.dispatchEvent(new Event('usuarioRegistrado'));
-        limpiarCampos();
-        navigate("/preprueba");
+    try {
+      setLoading(true);
+
+      const credentials = {
+        username: username,
+        contrasena: password
+      };
+
+      const usuarioLogeado = await loginAPI(credentials);
+
+      const usuarioCompleto = await obtenerUsuarioPorId(usuarioLogeado.idUsuario);
+      
+      localStorage.setItem('usuario', JSON.stringify(usuarioCompleto));
+      localStorage.setItem("isAuthenticated", "true");
+
+      window.dispatchEvent(new Event('usuarioRegistrado'));
+      
+      alert("¡Inicio de sesión exitoso!");
+      limpiarCampos();
+      navigate("/perfil");
+    } catch (error) {
+      if (error.response) {
+        if (error.response.status === 401 || error.response.status === 404) {
+          alert("Usuario o contraseña incorrectos");
+        } else {
+          alert("Error al iniciar sesión: " + (error.response.data.message || error.response.data));
+        }
+      } else if (error.request) {
+        alert("Sin conexión al servidor");
       } else {
-        alert("Credenciales incorrectas");
+        alert("Error inesperado: " + error.message);
       }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -54,30 +72,31 @@ export default function Login() {
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
-                  loginUsuario();
+                  handleLogin();
                 }}
               >
                 <div className="mb-3">
                   <label
-                    htmlFor="correoElectronicoLogin"
+                    htmlFor="username"
                     className="form-label"
                     style={{ color: "aliceblue" }}
                   >
-                    Correo electrónico
+                    Nombre de Usuario
                   </label>
                   <input
-                    type="email"
+                    type="text"
                     className="form-control"
-                    id="correoElectronicoLogin"
-                    placeholder="Ingresa tu correo electrónico"
-                    value={correoElectronicoLogin}
-                    onChange={(e) => setCorreoElectronicoLogin(e.target.value)}
+                    id="username"
+                    placeholder="Ingresa tu nombre de usuario"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
                     required
+                    disabled={loading}
                   />
                 </div>
                 <div className="mb-3">
                   <label
-                    htmlFor="passwordLogin"
+                    htmlFor="password"
                     className="form-label"
                     style={{ color: "aliceblue" }}
                   >
@@ -86,16 +105,17 @@ export default function Login() {
                   <input
                     type="password"
                     className="form-control"
-                    id="passwordLogin"
+                    id="password"
                     placeholder="**********"
-                    value={passwordLogin}
-                    onChange={(e) => setPasswordLogin(e.target.value)}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     required
+                    disabled={loading}
                   />
                 </div>
                 <div className="d-grid gap-2">
-                  <button type="submit" className="btn btn-primary">
-                    Iniciar Sesión
+                  <button type="submit" className="btn btn-primary" disabled={loading}>
+                    {loading ? "Iniciando sesión..." : "Iniciar Sesión"}
                   </button>
                   <Link
                     to="/recuperarContraseña"

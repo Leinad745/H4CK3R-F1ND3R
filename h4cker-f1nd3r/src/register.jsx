@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { registrarUsuario, obtenerUsuarioPorId } from "./services/usuarioService";
+import { registrarUsuario, obtenerUsuarioPorId } from "../services/userServices";
 
 export default function Register() {
   const [nombreCompleto, setNombreCompleto] = useState("");
@@ -69,7 +69,7 @@ export default function Register() {
       limpiarCampos();
       localStorage.setItem("usuario", JSON.stringify(usuarioRegistrado))
       window.dispatchEvent(new Event("usuarioRegistrado"));
-      navigate("/login");
+      navigate("/preprueba");
     } catch (error) {
       console.error("Error al registrar usuario:", error);
 
