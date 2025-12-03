@@ -32,7 +32,7 @@ const Foro = () => {
     try {
       setLoading(true);
       const data = await obtenerPublicaciones();
-      console.log('📦 Datos del backend:', data);
+      console.log('Datos del backend:', data);
       setPublicaciones(data);
       setError(null);
     } catch (err) {
@@ -163,7 +163,6 @@ const Foro = () => {
             ) : (
               <div className="text-center py-5">
                 <p className="text-muted">No hay publicaciones disponibles</p>
-                <p className="text-muted">¡Sé el primero en crear una!</p>
               </div>
             )}
           </div>
@@ -174,19 +173,19 @@ const Foro = () => {
             <h3>Categorías Populares</h3>
             <ul>
               <li>
-                <a href="#desarrollo">💻 Desarrollo</a>
+                <a href="#desarrollo">Desarrollo</a>
               </li>
               <li>
-                <a href="#proyectos">🚀 Proyectos</a>
+                <a href="#proyectos">Proyectos</a>
               </li>
               <li>
-                <a href="#tutorial">📚 Tutoriales</a>
+                <a href="#tutorial">Tutoriales</a>
               </li>
               <li>
-                <a href="#preguntas">❓ Preguntas</a>
+                <a href="#preguntas">Preguntas</a>
               </li>
               <li>
-                <a href="#trending">🔥 Trending</a>
+                <a href="#trending">Trending</a>
               </li>
             </ul>
           </div>

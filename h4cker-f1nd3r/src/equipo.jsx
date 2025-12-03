@@ -1,223 +1,138 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-
-import { useState } from "react";
-import teamLogo from "./assets/logo_team.png";
+import { useState, useEffect } from 'react';
+import { EquipoCard } from './components/equipoCard';
+import { obtenerEquipos } from '../services/equipoServices';
+import { obtenerMiembrosPorEquipo } from '../services/miembroEquipoServices';
 import './styles/equipo.css';
 
-export default function GestorEquipo() {
-    const [equipoData, setEquipoData] = useState({
-        nombre: "H4ck3r Team",
-        descripcion: "Equipo especializado en CTFs y competencias de ciberseguridad",
-        nivelEquipo: "Intermedio",
-        miembros: [
-            {
-                id: 1,
-                nombre: "John Doe",
-                rol: "Líder",
-                especialidad: "Web Exploitation"
-            },
-            {
-                id: 2,
-                nombre: "Jane Smith",
-                rol: "Miembro",
-                especialidad: "Reverse Engineering"
-            }
-        ]
-    });
+const Equipo = () => {
+  const [equipos, setEquipos] = useState([]);
+  const [equiposFiltrados, setEquiposFiltrados] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [busqueda, setBusqueda] = useState('');
+  const [miembros, setMiembros] = useState({});
 
-    const [mostrarModal, setMostrarModal] = useState(false);
-    const [nuevoMiembro, setNuevoMiembro] = useState({
-        nombre: "",
-        rol: "",
-        especialidad: ""
-    });
+  useEffect(() => {
+    cargarEquipos();
+  }, []);
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setNuevoMiembro(prev => ({
-            ...prev,
-            [name]: value
-        }));
-    };
+  useEffect(() => {
+    if (busqueda.trim() === '') {
+      setEquiposFiltrados(equipos);
+    } else {
+      const filtrados = equipos.filter(equipo =>
+        equipo.nombreEquipo.toLowerCase().includes(busqueda.toLowerCase()) ||
+        equipo.descripcion?.toLowerCase().includes(busqueda.toLowerCase())
+      );
+      setEquiposFiltrados(filtrados);
+    }
+  }, [busqueda, equipos]);
 
-    const agregarMiembro = (e) => {
-        e.preventDefault();
-        if (!nuevoMiembro.nombre || !nuevoMiembro.rol || !nuevoMiembro.especialidad) {
-            alert("Por favor completa todos los campos");
-            return;
-        }
+  const cargarEquipos = async () => {
+    try {
+      setLoading(true);
+      const data = await obtenerEquipos();
+      console.log('📦 Equipos del backend:', data);
+      setEquipos(data);
+      setEquiposFiltrados(data);
+      
+      for (const equipo of data) {
+        cargarMiembrosEquipo(equipo.idEquipo);
+      }
+      
+      setError(null);
+    } catch (err) {
+      setError('Error al cargar los equipos');
+      console.error('Error:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-        setEquipoData(prev => ({
-            ...prev,
-            miembros: [...prev.miembros, {
-                id: prev.miembros.length + 1,
-                ...nuevoMiembro
-            }]
-        }));
+  const cargarMiembrosEquipo = async (idEquipo) => {
+    try {
+      const miembrosData = await obtenerMiembrosPorEquipo(idEquipo);
+      setMiembros(prev => ({
+        ...prev,
+        [idEquipo]: miembrosData
+      }));
+    } catch (err) {
+      console.error(`Error al cargar miembros del equipo ${idEquipo}:`, err);
+    }
+  };
 
-        setNuevoMiembro({
-            nombre: "",
-            rol: "",
-            especialidad: ""
-        });
-        setMostrarModal(false);
-    };
+  const handleSolicitarUnirse = (equipo) => {
+    alert(`Solicitud enviada al equipo: ${equipo.nombreEquipo}\n\nEsta funcionalidad se completará en el perfil del usuario.`);
+  };
 
-    const eliminarMiembro = (id) => {
-        setEquipoData(prev => ({
-            ...prev,
-            miembros: prev.miembros.filter(miembro => miembro.id !== id)
-        }));
-    };
-
+  if (loading) {
     return (
-        <main>
-            <div className="container">
-                <div className="main-body">
-                    <div className="row gutters-sm">
-                        {/* Información del Equipo */}
-                        <div className="col-md-4 mb-3">
-                            <div className="card">
-                                <div className="card-body">
-                                    <div className="d-flex flex-column align-items-center text-center">
-                                        <img
-                                            src={teamLogo}
-                                            alt="Team Logo"
-                                            className="rounded-circle"
-                                            width={150}
-                                        />
-                                        <div className="mt-3">
-                                            <h4>{equipoData.nombre}</h4>
-                                            <p className="text-secondary mb-1">
-                                                {equipoData.nivelEquipo}
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Descripción y Miembros */}
-                        <div className="col-md-8">
-                            <div className="card mb-3">
-                                <div className="card-body">
-                                    <h5>Descripción del Equipo</h5>
-                                    <p>{equipoData.descripcion}</p>
-                                    <hr />
-
-                                    <h5>Miembros del Equipo</h5>
-                                    <div className="table-responsive">
-                                        <table className="table table-dark table-hover custom-table">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">Nombre</th>
-                                                    <th scope="col">Rol</th>
-                                                    <th scope="col">Especialidad</th>
-                                                    <th scope="col">Acciones</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {equipoData.miembros.map(miembro => (
-                                                    <tr key={miembro.id}>
-                                                        <td data-label="Nombre">
-                                                            <div className="d-flex align-items-center">
-                                                                <div className="avatar-circle">
-                                                                    {miembro.nombre.charAt(0)}
-                                                                </div>
-                                                                <span className="ms-2">{miembro.nombre}</span>
-                                                            </div>
-                                                        </td>
-                                                        <td data-label="Rol">
-                                                            <span className={`badge ${
-                                                                miembro.rol === "Líder" ? "bg-danger" : "bg-info"
-                                                            }`}>
-                                                                {miembro.rol}
-                                                            </span>
-                                                        </td>
-                                                        <td data-label="Especialidad">
-                                                            <span className="specialty-tag">
-                                                                {miembro.especialidad}
-                                                            </span>
-                                                        </td>
-                                                        <td data-label="Acciones">
-                                                            <button
-                                                                className="btn btn-outline-danger btn-sm"
-                                                                onClick={() => eliminarMiembro(miembro.id)}
-                                                            >
-                                                                <i className="fas fa-trash-alt"></i>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                ))}
-                                            </tbody>
-                                        </table>
-                                    </div>
-
-                                    <button
-                                        className="btn btn-primary mt-3"
-                                        onClick={() => setMostrarModal(true)}
-                                    >
-                                        Agregar Miembro
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {/* Modal para agregar miembro */}
-            {mostrarModal && (
-                <div className="modal-overlay" onClick={() => setMostrarModal(false)}>
-                    <div className="modal-content" onClick={e => e.stopPropagation()}>
-                        <h2>Agregar Nuevo Miembro</h2>
-                        <form onSubmit={agregarMiembro}>
-                            <div className="mb-3">
-                                <label className="form-label">Nombre</label>
-                                <input
-                                    type="text"
-                                    name="nombre"
-                                    className="form-control"
-                                    value={nuevoMiembro.nombre}
-                                    onChange={handleInputChange}
-                                />
-                            </div>
-                            <div className="mb-3">
-                                <label className="form-label">Rol</label>
-                                <input
-                                    type="text"
-                                    name="rol"
-                                    className="form-control"
-                                    value={nuevoMiembro.rol}
-                                    onChange={handleInputChange}
-                                />
-                            </div>
-                            <div className="mb-3">
-                                <label className="form-label">Especialidad</label>
-                                <input
-                                    type="text"
-                                    name="especialidad"
-                                    className="form-control"
-                                    value={nuevoMiembro.especialidad}
-                                    onChange={handleInputChange}
-                                />
-                            </div>
-                            <div className="d-flex gap-2">
-                                <button type="submit" className="btn btn-success">
-                                    Guardar
-                                </button>
-                                <button
-                                    type="button"
-                                    className="btn btn-secondary"
-                                    onClick={() => setMostrarModal(false)}
-                                >
-                                    Cancelar
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            )}
-        </main>
+      <div className="equipo-container">
+        <div className="text-center py-5">
+          <div className="spinner-border text-primary" role="status">
+            <span className="visually-hidden">Cargando...</span>
+          </div>
+          <p className="mt-3">Cargando equipos...</p>
+        </div>
+      </div>
     );
-}
+  }
+
+  if (error) {
+    return (
+      <div className="equipo-container">
+        <div className="alert alert-danger" role="alert">
+          {error}
+          <button 
+            className="btn btn-primary ms-3" 
+            onClick={cargarEquipos}
+          >
+            Reintentar
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="equipo-container">
+      <div className="equipo-header">
+        <h1>Explorar Equipos CTF</h1>
+        <p>Encuentra y únete a equipos de hacking ético</p>
+        
+        <div className="buscador-container">
+          <input
+            type="text"
+            className="buscador-input"
+            placeholder="Buscar equipos por nombre o descripción..."
+            value={busqueda}
+            onChange={(e) => setBusqueda(e.target.value)}
+          />
+        </div>
+      </div>
+
+      <div className="equipos-stats">
+        <p>Se encontraron {equiposFiltrados.length} equipo(s)</p>
+      </div>
+
+      <div className="equipos-grid">
+        {equiposFiltrados.length > 0 ? (
+          equiposFiltrados.map((equipo) => (
+            <EquipoCard
+              key={equipo.idEquipo}
+              equipo={equipo}
+              miembros={miembros[equipo.idEquipo]}
+              onSolicitar={handleSolicitarUnirse}
+            />
+          ))
+        ) : (
+          <div className="no-resultados">
+            <p className="text-muted">No se encontraron equipos con "{busqueda}"</p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default Equipo;

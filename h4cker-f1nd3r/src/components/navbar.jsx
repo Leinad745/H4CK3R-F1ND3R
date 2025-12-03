@@ -1,41 +1,54 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import logo_new from '../assets/logo_new.png'
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import '../styles/navbar.css';
 
 export function NavBar() {
-
-  // 
   const [hayUsuario, setHayUsuario] = useState(false);
+  const location = useLocation();
 
-  useEffect(() => {
-    const verificarUsuario = () => {
-      const usuariosGuardados = localStorage.getItem('usuarios');
-      
-      if (usuariosGuardados) {
-        try {
-          const usuarios = JSON.parse(usuariosGuardados);
-          setHayUsuario(usuarios && usuarios.length > 0);
-        } catch (error) {
-          console.error('Error al leer usuarios:', error);
-          setHayUsuario(false);
-        }
-      } else {
+  const verificarUsuario = () => {
+    const usuarioGuardado = localStorage.getItem('usuario');
+    
+    if (usuarioGuardado) {
+      try {
+        const usuario = JSON.parse(usuarioGuardado);
+        const tieneId = usuario && usuario.idUsuario;
+        console.log('🔍 Verificando usuario:', tieneId);
+        setHayUsuario(tieneId);
+      } catch (error) {
+        console.error('Error al leer usuario:', error);
         setHayUsuario(false);
       }
-    };
+    } else {
+      setHayUsuario(false);
+    }
+  };
 
+  useEffect(() => {
+    // Verificar al montar
     verificarUsuario();
 
+    // Verificar en cada cambio de ruta
+    verificarUsuario();
+  }, [location]);
+
+  useEffect(() => {
+    // Escuchar eventos
     window.addEventListener('storage', verificarUsuario);
+    window.addEventListener('login', verificarUsuario);
+    window.addEventListener('usuarioRegistrado', verificarUsuario);
     
-    return () => window.removeEventListener('storage', verificarUsuario);
+    return () => {
+      window.removeEventListener('storage', verificarUsuario);
+      window.removeEventListener('login', verificarUsuario);
+      window.removeEventListener('usuarioRegistrado', verificarUsuario);
+    };
   }, []);
 
-
-return (
+  return (
     <nav className="navbar navbar-expand-lg">
       <div className="container-fluid">
         
